@@ -1,0 +1,137 @@
+
+
+
+
+<% content_for :css do %>
+<%= stylesheet_link_tag "plugins/iCheck/custom.css" %>
+
+<%= stylesheet_link_tag "plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote.css" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote-bs3.css" %>
+
+<%= stylesheet_link_tag "plugins/datapicker/datepicker3" %>
+<% end %>
+
+<% content_for :js do %>
+<!-- Jquery Validate -->
+<%= javascript_include_tag "plugins/validate/jquery.validate.min" %>
+<!-- Data picker -->
+<%= javascript_include_tag "plugins/datapicker/bootstrap-datepicker" %>
+
+<!-- iCheck -->
+<%= javascript_include_tag "plugins/iCheck/icheck.min" %>
+<!-- SUMMERNOTE -->
+<%= javascript_include_tag "plugins/summernote/summernote.min" %>
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+              height: 150   //set editable area's height
+            });
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            $("#new_company").validate({
+                rules: {
+                    'company[name]': {
+                        required: true,
+                        minlength: 5,
+                        maxlength: 60
+                    },
+                   'company[description]': {
+                        required: true,
+                        minlength: 200,
+                        maxlength: 2000
+                    },
+                    'company[business_entity]': {
+                        required: true
+                    },
+                    'company[vatcode]': {
+                        required: true
+                    },
+                    'company[company_id_number]': {
+                        required: true
+                    },
+                    'company[cea]': {
+                        required: true
+                    },
+                    'company[registration_date]': {
+                        required: true
+                    }
+                },
+                messages: {
+                    'company[name]': {
+                        required: "Введите название компании",
+                        minlength: "Название компании должно состоять из не менее 5 знаков." 
+                    },
+                    'company[description]': {
+                        required: "Введите описание компании.",
+                        minlength: "Описание компании должно состоять не менее чем из 200 знаков.",
+                        maxlength: "Описание компании должно состоять не более чем 2000 знаков."
+                    }
+                }
+            });
+            $('#data_1 .input-group.date').datepicker({
+                
+                defaultViewDate: { year: 2000, month: 01, day: 25 },
+                keyboardNavigation: true,
+                forceParse: false,
+                calendarWeeks: true,
+                format: "yyyy-mm-dd",
+                autoclose: true
+            });
+        });
+    </script>
+<% end %>
+<div class="middle-box manufacturer_steps_screen   animated fadeInDown">
+    <div class="text-center">
+        <h3>Добавьте свою компанию</h3>
+        <p>О Вашей компании теперь узнают все.</p>
+    </div>
+    <%= form_for @company, method: :put, url: wizard_path, class: "m-t" do |f| %>
+        <% if f.object.errors.any? %>
+            <div class="error_messages">
+              <% f.object.errors.full_messages.each do |error| %>
+                <p><%= error %></p>
+              <% end %>
+            </div>
+        <% end %>
+        <div class="form-group">
+            <%= f.text_field :business_entity, placeholder: "Правовая форма", class: "form-control" %>
+            <span class="help-block m-b-none">Объяснительный текст.</span>
+        </div>
+        <div class="form-group">
+            <%= f.text_field :business_entity, placeholder: "Правовая форма", class: "form-control" %>
+            <span class="help-block m-b-none">Объяснительный текст.</span>
+        </div>
+        <div class="form-group">
+            <%= f.text_field :vatcode, placeholder: "ЕДРПОУ", class: "form-control" %>
+            <span class="help-block m-b-none">Объяснительный текст.</span>
+        </div>
+        <div class="form-group">
+            <%= f.text_field :company_id_number, placeholder: "идентификационный номер", class: "form-control" %>
+            <span class="help-block m-b-none">Объяснительный текст.</span>
+        </div>
+        <div class="form-group">
+            <%= f.text_field :cea, placeholder: "cea", class: "form-control" %>
+            <span class="help-block m-b-none">Объяснительный текст.</span>
+        </div>
+        <div class="form-group" id="data_1">
+            <label class="font-noraml">Simple data input format</label>
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= f.text_field :registration_date, placeholder: "дата регистрации", class: "form-control" %>
+
+            </div>
+            <span class="help-block m-b-none">Объяснительный текст.</span>
+        </div>
+
+         
+        <%= f.submit 'Следующий шаг', class: "btn btn-primary m-b" %>
+    <% end %>
+</div>

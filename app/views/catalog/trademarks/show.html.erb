@@ -1,0 +1,190 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Профиль - <%= @trademark.name %></h2>
+        <ol class="breadcrumb">
+            <li><a href="<%= dashboard_path %>">Главная</a></li>
+            <li><a>Профиль торговой марки</a></li>
+            <li class="active"><strong><%= @trademark.name %></strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-6">
+            <div class="profile-image">
+                <%= image_tag @trademark.logo.url(:profile), alt: @trademark.name %>
+                
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            <%= @trademark.name %>
+                        </h2>
+                        <h4><%#= raw current_user.post %> <%#= raw current_user.company.name if current_user.company %></h4>
+                        <small>
+                            <%= raw @trademark.description %>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <table class="table small m-b-xs">
+                <tbody>
+                <tr>
+                    <td><strong><%= @trademark.products.count %></strong>Товаров</td>
+                    <td><strong><%#= @trademark.products.categories.count %></strong>Категории</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>61</strong> Comments
+                    </td>
+                    <td>
+                        <strong>54</strong> Articles
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>154</strong> Tags
+                    </td>
+                    <td>
+                        <strong>32</strong> Friends
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3">
+            <small>Sales in last 24h</small>
+            <h2 class="no-margins">206 480</h2>
+            <div id="sparkline1"></div>
+        </div>
+
+
+    </div>
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <div class="ibox">
+                <div class="ibox-content">
+                        <h3><%= @trademark.name %></h3>
+
+                    <p class="small">
+                        There are many variations of passages of Lorem Ipsum available, but the majority have
+                        suffered alteration in some form, by injected humour, or randomised words which don't.
+                        <br>
+                        <br>
+                        If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
+                        anything embarrassing
+                    </p>
+
+                    <p class="small font-bold">
+                        <span><i class="fa fa-circle text-navy"></i> Online status</span>
+                        </p>
+
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Followers and friends</h3>
+                    <p class="small">
+                        If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
+                        anything embarrassing
+                    </p>
+                    <!-- <div class="user-friends">
+                        <a href=""><img alt="image" class="img-circle" src="img\a3.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a1.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a2.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a4.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a5.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a6.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a7.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a8.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a2.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a1.jpg"></a>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Personal friends</h3>
+                    <ul class="list-unstyled file-list">
+                        <li><a href=""><i class="fa fa-file"></i> Project_document.docx</a></li>
+                        <li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
+                        <li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>
+                        <li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>
+                        <li><a href=""><i class="fa fa-file-powerpoint-o"></i> Presentation.pptx</a></li>
+                        <li><a href=""><i class="fa fa-file"></i> 10_08_2015.docx</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Private message</h3>
+
+                    <p class="small">
+                        Send private message to Alex Smith
+                    </p>
+
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="email" class="form-control" placeholder="Message subject">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea class="form-control" placeholder="Your message" rows="3"></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-block">Send</button>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-9">
+            <% @featured_products.each_slice(2) do |products_group| %>
+                <div class="row">
+                    <% products_group.each do |product| %>
+                    <div class="col-md-6">
+                        <div class="ibox">
+                            <div class="ibox-content product-box">
+                                <% product.product_images.first(1).each do |i| %>
+                                   <%= image_tag i.image_url(:large_thumb), class: 'img-responsive' %>
+                                <% end %>
+                                <% if product.product_images.empty? %>
+                                <div class="product-imitation">
+                                    [ НЕТ ФОТО ]
+                                </div>
+                                <% end %>
+                                <div class="product-desc">
+                                    <span class="product-price">
+                                        <%= product.price %> Грн.
+                                    </span>
+                                    <% if product.category.name %>
+                                    <small data-toggle="tooltip" title="<%= product.category.name %>" class="text-muted"><%= product.category.name.truncate(30) %></small>
+                                    <% end %>
+                                    <a href="<%= catalog_product_path(product) %>" data-toggle="tooltip" title="<%= product.name if product.name %>" class="product-name"> <%= product.name.truncate(20) if product.name %></a>
+                                    <div class="small m-t-xs">
+                                        <%= sanitize(product.description.truncate(60)) if product.description %>
+                                    </div>
+                                    <div class="m-t text-righ">
+                                        <%= link_to "Подробнее", catalog_product_path(product), class: "btn btn-xs btn-outline btn-primary" %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+                <% end %>
+        </div>
+    </div>
+</div>
+ 

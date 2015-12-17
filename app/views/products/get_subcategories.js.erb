@@ -1,0 +1,1 @@
+$('#subcategories_select').html("<%= j collection_select(:product, :category_id, @subcategories, :id, :title), { prompt: 'Select subcategory...' }, { disabled: false } %>");

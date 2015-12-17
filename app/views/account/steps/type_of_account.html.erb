@@ -1,0 +1,45 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag "plugins/iCheck/custom.css" %>
+<%= stylesheet_link_tag "plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox" %>
+<% end %>
+
+<% content_for :js do %>
+<!-- Jquery Validate -->
+<%= javascript_include_tag "plugins/validate/jquery.validate.min" %>
+
+<!-- iCheck -->
+<%= javascript_include_tag "plugins/iCheck/icheck.min" %>
+    <script>
+        $(document).ready(function () {
+            
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+<% end %>
+<div class="middle-box text-center loginscreen   animated fadeInDown">
+<h3>Определите свой статус!</h3>
+<p>Зарегистрироваться как?</p>
+<%= form_for @user, method: :put, url: wizard_path do |f| %>
+    <% if f.object.errors.any? %>
+        <div class="error_messages">
+            <% f.object.errors.full_messages.each do |error| %>
+                <p><%= error %></p>
+            <% end %>
+        </div>
+    <% end %>
+    <div class="form-group">
+        <%= f.select :role_id, options_for_select(Role.where.not(name: %w(admin moderator operator)).collect{ |r| [t(r.name, :scope => '.role_name'), r.id] }) %>
+    </div>
+     
+      <%= f.submit 'Начать', class: "btn btn-primary" %>
+    </div>
+  </fieldset>
+<% end %>

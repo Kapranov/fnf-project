@@ -1,0 +1,8 @@
+добавил торговую марку
+
+<% if activity.trackable %>
+
+  <%= link_to activity.trackable.name, trademark_path(activity.trackable) %>
+<% else %>
+  which has since been removed
+<% end %>

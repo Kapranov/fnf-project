@@ -1,0 +1,162 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="wrapper wrapper-content">
+                  
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content text-center p-md">
+                        <h1>Добро пожаловать в <span class="text-navy">FNF</span></h1>
+                        <h2>Вас приветствует огромный мир товаров.</h2>
+                        <h3><span class="text-navy"><%= Product.all.count %> товаров от <%= Company.all.count %> компаний. Продавайте и покупайте!</span></h3>
+                    </div>
+                </div>
+                <div class="wrapper wrapper-content">
+
+                <%# @root_categories.take(10).each do |categories_root| %>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tabs-container">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab-1">Продукты питания</a></li>
+                                <li><a data-toggle="tab" href="#tab-2">Потребительские товары</a></li>
+                            </ul>
+                            <div class="tab-content">  
+                                <div id="tab-1" class="tab-pane active">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <ul class="nav">
+                                                    <%= categories = Category.find(1).childrens %>
+                                                     
+                                                     
+                                                </ul>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <div class="row">
+                                                    <% Category.all.each do |c| %>
+                                                    <div class="col-md-4">
+                                                        <div class="ibox">
+                                                            <a href="<%= catalog_category_path(c) %>">
+                                                                <div class="ibox-content category-box">
+                                                                    <div class="category-image">
+                                                                        <%= image_tag c.image_url(:category_thumb) %>
+                                                                    </div>
+                                                                    <span class="category-name">
+                                                                        <%= c.name %>
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <% end %>
+                                                     
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                                <div id="tab-2" class="tab-pane">
+                                    <div class="panel-body">
+                                        <strong>Donec quam felis</strong>
+
+                                        <p>Thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects
+                                            and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath </p>
+
+                                        <p>I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite
+                                            sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%# end %>
+                <div class="ibox-content m-b-sm border-bottom gray-bg">
+                    <div class="p-xs">
+                        <div class="pull-left m-r-md">
+                            <i class="fa fa-star-o text-navy mid-icon"></i>
+                        </div>
+                        <h2>Мы рекомендуем</h2>
+                        <span>Feel free to choose topic you're interested in.</span>
+                    </div>
+                </div>
+                <% @featured_products.each_slice(4) do |products_group| %>
+                <div class="row">
+                    <% products_group.each do |product| %>
+                    <div class="col-md-3">
+                        <div class="ibox">
+                            <div class="ibox-content product-box">
+                                <% product.product_images.first(1).each do |i| %>
+                                   <%= image_tag i.image_url(:large_thumb), class: 'img-responsive' %>
+                                <% end %>
+                                <% if product.product_images.empty? %>
+                                <div class="product-imitation">
+                                    [ НЕТ ФОТО ]
+                                </div>
+                                <% end %>
+                                <div class="product-desc">
+                                    <span class="product-price">
+                                        <%= product.price %> Грн.
+                                    </span>
+                                    <% if product.category.name %>
+                                    <small data-toggle="tooltip" title="<%= product.category.name %>" class="text-muted"><%= product.category.name.truncate(30) %></small>
+                                    <% end %>
+                                    <a href="<%= catalog_product_path(product) %>" data-toggle="tooltip" title="<%= product.name if product.name %>" class="product-name"> <%= product.name.truncate(20) if product.name %></a>
+                                    <div class="small m-t-xs">
+                                        <%= sanitize(product.description.truncate(60)) if product.description %>
+                                    </div>
+                                    <div class="m-t text-righ">
+                                        <%= link_to "Подробнее", catalog_product_path( product), class: "btn btn-xs btn-outline btn-primary" %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+                <% end %>
+                <div class="ibox-content m-b-sm border-bottom">
+                    <div class="p-xs">
+                        <div class="pull-left m-r-md">
+                            <i class="fa fa-search text-navy mid-icon"></i>
+                        </div>
+                        <h2>Популярное в поиске</h2>
+                        <span>Feel free to choose topic you're interested in.</span>
+                    </div>
+                    <div class="text-center p-md">
+                        <span class="simple_tag">Scroll navbar</span>
+                        <span class="simple_tag">Top fixed navbar</span>
+                        <span class="simple_tag">Boxed layout</span>
+                        <span class="simple_tag">Scroll footer</span>
+                        <span class="simple_tag">Fixed footer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="yellow-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox-content m-b-sm border-bottom">
+                    <%= simple_form_for(resource, :as => resource_name, url: registration_path(resource_name), :html => { :role => 'form', class: 'form-inline', style: 'text-align: center;'}) do |f| %>
+                    <%= f.error_notification %>
+                    <%= devise_error_messages! %>
+                        <div class="form-group">
+                            <%= f.text_field :first_name, required: true, class: 'form-control', placeholder: "Имя" %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.email_field :email, required: true, class: 'form-control', placeholder: "Электронная почта" %>
+                        </div>
+                        <%= f.submit "Зарегистрироваться", :class => 'btn btn-primary ' %>
+                         
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 

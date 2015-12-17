@@ -1,0 +1,163 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag "plugins/iCheck/custom.css" %>
+
+<%= stylesheet_link_tag "plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote.css" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote-bs3.css" %>
+<% end %>
+
+<% content_for :js do %>
+<!-- iCheck -->
+<%= javascript_include_tag "plugins/iCheck/icheck.min" %>
+<!-- SUMMERNOTE -->
+<%= javascript_include_tag "plugins/summernote/summernote.min" %>
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote();
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+<% end %>
+
+<div class="wrapper wrapper-content ecommerce">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <% if @company.new_record? %>
+                    <h5>Создание компании <small>в самом большом Украинском каталоге</small></h5>
+                    <% else %>
+                    <h5>Редактирование компании <small>в самом большом Украинском каталоге</small></h5>
+                    <% end %>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <%= form_for([:administration, @company]) do |f| %>
+                <div class="ibox-content">
+                    <fieldset class="form-horizontal">
+                        <div class="form-group"><label class="col-sm-2 control-label">Имя:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :name, placeholder: "Имя категории", class: "form-control" %>
+                                <span class="help-block m-b-none">Общеизвестное название для этой категории. Недопустимые символы <>;=#{}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Показывать:</label>
+                            <div class="col-sm-10">
+                            <% @company.state_events.each do |event| %>
+                                <div class="i-checks"><label class="radio inline control-label"> <%= f.radio_button :state_event, event %> <i></i> <%= I18n.t event, scope: "company_status" %> </label></div>
+                            <% end %>
+
+                            <%#= f.collection_select :state_event, @company.state_transitions, :event, :human_to_name, { }, class: "select2 form-control input-lg"   %>
+                                <!-- <div class="i-checks"><label class="radio inline control-label"> <%= f.radio_button 'state', "to_publish" %> <i></i> Опубликована </label></div>
+                                <div class="i-checks"><label class="radio inline control-label"> <%= f.radio_button 'state', "to_modify" %> <i></i> Черновик </label></div> -->
+                                
+                            </div>
+                        </div>
+                         
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Описание:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_area :description, style: "width: 100%; height: 100%;", class: "summernote" %>
+                                     
+                                <span class="help-block m-b-none">Описание появляется в середине страницы товара.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Мета-заголовок:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :meta_title, placeholder: "Мета заголовок", class: "form-control" %>
+                                <span class="help-block m-b-none">Публичное название для страницы категории, и для поисковых систем. Оставьте пустым, чтобы использовать название категории. Количество оставшихся символов отображается в левой области.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Мета описание:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :meta_description, placeholder: "Мета описание", class: "form-control" %>
+                                <span class="help-block m-b-none">Это тип кода товара, широко используется в США, Канаде, Великобритании, Австралии, Новой Зеландии и в других странах.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Мета ключевые слова:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :meta_keywords, placeholder: "Мета ключевые слова", class: "form-control" %>
+                                <span class="help-block m-b-none">Это тип кода товара, широко используется в США, Канаде, Великобритании, Австралии, Новой Зеландии и в других странах.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Правовая форма:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :business_entity, placeholder: "business_entity", class: "form-control" %>
+                                <span class="help-block m-b-none">Это тип кода товара, широко используется в США, Канаде, Великобритании, Австралии, Новой Зеландии и в других странах.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ЕДРПОУ:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :vatcode, placeholder: "ЕДРПОУ", class: "form-control" %>
+                                <span class="help-block m-b-none">Это тип кода товара, широко используется в США, Канаде, Великобритании, Австралии, Новой Зеландии и в других странах.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Правовая форма:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :company_id_number, placeholder: "company_id_number", class: "form-control" %>
+                                <span class="help-block m-b-none">Это тип кода товара, широко используется в США, Канаде, Великобритании, Австралии, Новой Зеландии и в других странах.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Мета ключевые слова:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :cea, placeholder: "cea", class: "form-control" %>
+                                <span class="help-block m-b-none">Это тип кода товара, широко используется в США, Канаде, Великобритании, Австралии, Новой Зеландии и в других странах.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Дата регистрации:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :registration_date, placeholder: "дата регистрации", class: "form-control" %>
+                                <span class="help-block m-b-none">Это тип кода товара, широко используется в США, Канаде, Великобритании, Австралии, Новой Зеландии и в других странах.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <%= f.submit "Сохранить", data: { disable_with: (@company.new_record? ? "Создание компании ..." : "Обновление компании ...") }, class: "btn btn-primary" %>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

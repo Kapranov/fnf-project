@@ -1,0 +1,58 @@
+<% content_for :js do %>
+<!-- Jquery Validate -->
+<%= javascript_include_tag "plugins/validate/jquery.validate.min" %>
+    <script>
+        $(document).ready(function () {
+            $(".edit_user").validate({
+                rules: {
+                    'user[post]': {
+                        required: true
+                    },
+                   'user[about]': {
+                        required: true
+                    }
+                },
+                messages: {
+                    'user[post]': {
+                        required: "Введите Вашу должность в компинии где Вы работаете.",
+                    },
+                    'user[about]': {
+                        required: "Введите краткую информацию о себе.",
+                    }
+                }
+            });
+        
+
+    
+             
+        });
+    </script>
+<% end %>
+<div class="middle-box text-center loginscreen   animated fadeInDown">
+    <h3>А теперь немного о себе</h3>
+    <p>С Вами с могут общаться другие пользователи сети.</p>
+    <%= form_for @user, method: :put, url: wizard_path, class: "m-t" do |f| %>
+        <% if f.object.errors.any? %>
+            <div class="error_messages">
+              <% f.object.errors.full_messages.each do |error| %>
+                <p><%= error %></p>
+              <% end %>
+            </div>
+        <% end %>
+        <div class="form-group">
+             
+            <%= f.file_field :avatar %>
+           
+            <%= f.cropbox :avatar %>
+            <%= f.previewbox :avatar %>
+            <%= f.submit 'Загрузить фото', name: "upload_avatar" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :post, placeholder: "Должность", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_area :about, rows: "5", placeholder: "Немного о себе", class: "form-control" %>
+        </div>
+        <%= f.submit 'Следующий шаг', class: "btn btn-primary block full-width m-b" %>
+    <% end %>
+</div>

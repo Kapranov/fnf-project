@@ -1,0 +1,73 @@
+
++BRAKEMAN REPORT+
+
+Application path: /home/winhack/RailsProjects/fnf
+Rails version: 4.2.4
+Brakeman version: 3.1.2
+Started at 2015-11-30 11:47:35 +0200
+Duration: 6.980517193 seconds
+Checks run: BasicAuth, ContentTag, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NumberToCurrency, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, StripTags, SymbolDoSCVE, TranslateBug, UnsafeReflection, ValidationRegex, WithoutProtection, XMLDoS, YAMLParsing
+
+
++SUMMARY+
+
++-------------------+---------+
+| Scanned/Reported  | Total   |
++-------------------+---------+
+| Controllers       | 40      |
+| Models            | 14      |
+| Templates         | 193     |
+| Errors            | 0       |
+| Security Warnings | 26 (14) |
++-------------------+---------+
+
++----------------------+-------+
+| Warning Type         | Total |
++----------------------+-------+
+| Cross Site Scripting | 16    |
+| Mass Assignment      | 1     |
+| SQL Injection        | 9     |
++----------------------+-------+
+
+
++SECURITY WARNINGS+
+
++------------+-------------------------------------+------------------+------->>
+| Confidence | Class                               | Method           | Warnin>>
++------------+-------------------------------------+------------------+------->>
+| Medium     | Administration::SettingsController  | update           | Mass A>>
+| Medium     | Administration::CustomersController | all              | SQL In>>
+| Medium     | Administration::CustomersController | manufacturers    | SQL In>>
+| Medium     | Administration::CustomersController | distributors     | SQL In>>
+| Medium     | Administration::CustomersController | simple_customers | SQL In>>
+| Medium     | Administration::EmployeesController | index            | SQL In>>
+| Medium     | Administration::EmployeesController | all              | SQL In>>
+| Medium     | Administration::EmployeesController | administrators   | SQL In>>
+| Medium     | Administration::EmployeesController | moderators       | SQL In>>
+| Medium     | Administration::EmployeesController | operators        | SQL In>>
++------------+-------------------------------------+------------------+------->>
+
+
+View Warnings:
+
++------------+---------------------------------------------------------------->>
+| Confidence | Template                                                       >>
++------------+---------------------------------------------------------------->>
+| High       | administration/companies/show (Administration::CompaniesControl>>
+| High       | administration/customers/show (Administration::CustomersControl>>
+| High       | administration/customers/show (Administration::CustomersControl>>
+| High       | administration/customers/show (Administration::CustomersControl>>
+| High       | administration/employees/show (Administration::EmployeesControl>>
+| High       | administration/employees/show (Administration::EmployeesControl>>
+| High       | catalog/categories/index (Catalog::CategoriesController#index) >>
+| High       | catalog/categories/show (Catalog::CategoriesController#show)   >>
+| High       | catalog/companies/show (Catalog::CompaniesController#show)     >>
+| High       | catalog/customers/show (Catalog::CustomersController#show)     >>
+| High       | catalog/customers/show (Catalog::CustomersController#show)     >>
+| High       | catalog/customers/show (Catalog::CustomersController#show)     >>
+| High       | catalog/trademarks/show (Catalog::TrademarksController#show)   >>
+| High       | categories/show (CategoriesController#show)                    >>
+| Weak       | companies/index (CompaniesController#index)                    >>
+| Weak       | companies/show (CompaniesController#create)                    >>
++------------+---------------------------------------------------------------->>
+

@@ -1,0 +1,2612 @@
+<!DOCTYPE HTML SYSTEM>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Brakeman Report</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    function toggle(context) {
+      var elem = document.getElementById(context);
+
+      if (elem.style.display != "block")
+        elem.style.display = "block";
+      else
+        elem.style.display = "none";
+
+      elem.parentNode.scrollIntoView();
+    }
+
+    $(document).ready(function() {
+      $('table').DataTable({
+        searching: false,
+        paging:    false,
+        info:      false
+      });
+    });
+  </script>
+  <style>
+    /* CSS style used for HTML reports */
+
+body {
+  font-family: sans-serif;
+  color: #161616;
+}
+
+a {
+  color: #161616;
+}
+
+p {
+  font-weight: bold;
+  font-size: 11pt;
+  color: #2D0200;
+ }
+
+ th {
+   background-color: #980905;
+   border-bottom: 5px solid #530200;
+   color: white;
+   font-size: 11pt;
+   padding: 1px 8px 1px 8px;
+ }
+
+ td {
+   border-bottom: 2px solid white;
+   font-family: monospace;
+   padding: 5px 8px 1px 8px;
+ }
+
+ table {
+   background-color: #FCF4D4;
+   border-collapse: collapse;
+ }
+
+ h1 {
+   color: #2D0200;
+   font-size: 14pt;
+ }
+
+ h2 {
+   color: #2D0200;
+   font-size: 12pt;
+ }
+
+ span.high-confidence {
+   font-weight:bold;
+   color: red;
+ }
+
+ span.med-confidence {
+ }
+
+ span.weak-confidence {
+   color:gray;
+ }
+
+ div.warning_message {
+   cursor: pointer;
+ }
+
+ div.warning_message:hover {
+   background-color: white;
+ }
+
+ table caption {
+   background-color: #FFE;
+   padding: 2px;
+ }
+
+ table.context {
+   margin-top: 5px;
+   margin-bottom: 5px;
+   border-left: 1px solid #90e960;
+   color: #212121;
+ }
+
+ tr.context {
+   background-color: white;
+ }
+
+ tr.first {
+   border-top: 1px solid #7ecc54;
+   padding-top: 2px;
+ }
+
+ tr.error {
+  background-color: #f4c1c1 !important
+ }
+
+ tr.near_error {
+  background-color: #f4d4d4 !important
+ }
+
+ tr.alt {
+   background-color: #e8f4d4;
+ }
+
+ td.context {
+   padding: 2px 10px 0px 6px;
+   border-bottom: none;
+ }
+
+ td.context_line {
+   padding: 2px 8px 0px 7px;
+   border-right: 1px solid #b3bda4;
+   border-bottom: none;
+   color: #6e7465;
+ }
+
+ pre.context {
+   margin-bottom: 1px;
+ }
+
+ .user_input {
+   background-color: #fcecab;
+ }
+
+ div.render_path {
+   display: none;
+   background-color: #ffe;
+   padding: 5px;
+   margin: 2px 0px 2px 0px;
+ }
+
+ div.template_name {
+   cursor: pointer;
+ }
+
+ div.template_name:hover {
+   background-color: white;
+ }
+
+  </style>
+</head>
+<body>
+
+<h1>Brakeman Report</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Application Path</th>
+      <th>Rails Version</th>
+      <th>Brakeman Version</th>
+      <th>Report Time</th>
+      <th>Checks Performed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/home/winhack/RailsProjects/fnf</td>
+      <td>4.2.4</td>
+      <td>3.1.2
+      <td>
+        2015-11-24 12:18:13 +0200<br><br>
+        7.480400273 seconds
+      </td>
+      <td>BasicAuth, ContentTag, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NumberToCurrency, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, StripTags, SymbolDoSCVE, TranslateBug, UnsafeReflection, ValidationRegex, WithoutProtection, XMLDoS, YAMLParsing</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2 id='summary'>Summary</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Scanned/Reported</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Controllers</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>Models</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>Templates</td>
+      <td>180</td>
+    </tr>
+    <tr>
+      <td>Errors</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>Security Warnings</td>
+      <td>23 <span class='high-confidence'>(11)</span></td>
+    </tr>
+  
+    <tr>
+      <td>Ignored Warnings</td>
+      <td>0</td>
+    </tr>
+  
+  </tbody>
+</table>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Warning Type</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>Cross Site Scripting</td>
+      <td>13</td>
+    </tr>
+  
+    <tr>
+      <td>Redirect</td>
+      <td>1</td>
+    </tr>
+  
+    <tr>
+      <td>SQL Injection</td>
+      <td>9</td>
+    </tr>
+  
+  </tbody>
+</table>
+<br>
+<div onClick="toggle('errors_table');">  <h2>Exceptions raised during the analysis (click to see them)</h2 ></div>
+  <div>
+    <div id='errors_table' style='display:none'> 
+      <table>
+        <thead>
+          <tr>
+            <th>Error</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr>
+            <td>/home/winhack/RailsProjects/fnf/app/controllers/administration/orders_controller.rb:63 :: parse error on value &quot;:&quot; (tCOLON)</td>
+            <td>
+              
+                Could not parse /home/winhack/RailsProjects/fnf/app/controllers/administration/orders_controller.rb
+              
+            </td>
+          </tr>
+        
+          <tr>
+            <td>/home/winhack/RailsProjects/fnf/app/controllers/administration/settings_controller.rb:11 :: parse error on value [&quot;end&quot;, 11] (kEND)</td>
+            <td>
+              
+                Could not parse /home/winhack/RailsProjects/fnf/app/controllers/administration/settings_controller.rb
+              
+            </td>
+          </tr>
+        
+          <tr>
+            <td>/home/winhack/RailsProjects/fnf/app/controllers/stores_controller.rb:15 :: parse error on value [&quot;end&quot;, 15] (kEND)</td>
+            <td>
+              
+                Could not parse /home/winhack/RailsProjects/fnf/app/controllers/stores_controller.rb
+              
+            </td>
+          </tr>
+        
+          <tr>
+            <td>/home/winhack/RailsProjects/fnf/app/controllers/users_controller.rb:49 :: parse error on value &quot;note&quot; (tSYMBOL)</td>
+            <td>
+              
+                Could not parse /home/winhack/RailsProjects/fnf/app/controllers/users_controller.rb
+              
+            </td>
+          </tr>
+        
+          <tr>
+            <td>/home/winhack/RailsProjects/fnf/app/models/order/billing.rb:114 :: parse error on value [&quot;end&quot;, 114] (kEND)</td>
+            <td>
+              
+                Could not parse /home/winhack/RailsProjects/fnf/app/models/order/billing.rb
+              
+            </td>
+          </tr>
+        
+          <tr>
+            <td>/home/winhack/RailsProjects/fnf/app/models/order/states.rb:33 :: parse error on value nil (error)</td>
+            <td>
+              
+                Could not parse /home/winhack/RailsProjects/fnf/app/models/order/states.rb
+              
+            </td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+  </div>
+<h2>Security Warnings</h2>  
+<table>
+  <thead>
+    <tr>
+      <th>Confidence</th>
+      <th>Class</th>
+      <th>Method</th>
+      <th>Warning Type</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>Administration::CustomersController</td>
+      <td>all</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context2');toggle('message2');toggle('full_message2')" ><span id='message2' style='display:block' >Possible SQL injection near line 20: User.all_customers([Role.with_name(:simple_customer).id, Role.wi...</span><span id='full_message2' style='display:none'>Possible SQL injection near line 20: User.all_customers([Role.with_name(:simple_customer).id, Role.with_name(:distributor).id, Role.with_name(:manufacturer).id]).search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;) + sort_direction))</span><table id='context2' class='context' style='display:none'><caption>app/controllers/administration/customers_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>15</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  def all</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>16</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    manufacturer = Role.with_name(:manufacturer).id</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>17</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    distributor = Role.with_name(:distributor).id</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>18</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    simple_customer = Role.with_name(:simple_customer).id</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @customers = User.all_customers([simple_customer, distributor, manufacturer]).search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #@employee = User.paginate(:page =&gt; params[:page], :per_page =&gt; 10).order(last_name: :desc)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def manufacturers</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @customers = User.manufacturers.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>Administration::CustomersController</td>
+      <td>manufacturers</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context3');toggle('message3');toggle('full_message3')" ><span id='message3' style='display:block' >Possible SQL injection near line 25: User.manufacturers.search(params[:search]).order(((<span class="user_input">sort_column</span> +...</span><span id='full_message3' style='display:none'>Possible SQL injection near line 25: User.manufacturers.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;) + sort_direction))</span><table id='context3' class='context' style='display:none'><caption>app/controllers/administration/customers_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>20</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    @customers = User.all_customers([simple_customer, distributor, manufacturer]).search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #@employee = User.paginate(:page =&gt; params[:page], :per_page =&gt; 10).order(last_name: :desc)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def manufacturers</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @customers = User.manufacturers.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def distributors</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @customers = User.distributors.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>Administration::CustomersController</td>
+      <td>distributors</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context4');toggle('message4');toggle('full_message4')" ><span id='message4' style='display:block' >Possible SQL injection near line 29: User.distributors.search(params[:search]).order(((<span class="user_input">sort_column</span> + ...</span><span id='full_message4' style='display:none'>Possible SQL injection near line 29: User.distributors.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;) + sort_direction))</span><table id='context4' class='context' style='display:none'><caption>app/controllers/administration/customers_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>24</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  def manufacturers</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @customers = User.manufacturers.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def distributors</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @customers = User.distributors.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def simple_customers</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @customers = User.simple_customers.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>Administration::CustomersController</td>
+      <td>simple_customers</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context5');toggle('message5');toggle('full_message5')" ><span id='message5' style='display:block' >Possible SQL injection near line 33: User.simple_customers.search(params[:search]).order(((sort_colum...</span><span id='full_message5' style='display:none'>Possible SQL injection near line 33: User.simple_customers.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;) + sort_direction))</span><table id='context5' class='context' style='display:none'><caption>app/controllers/administration/customers_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>28</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  def distributors</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @customers = User.distributors.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def simple_customers</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @customers = User.simple_customers.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>36</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def show</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>37</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    if @customer.company.try(:any?)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>38</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      #@featured_products = @customer.company.products.filter(params.slice(:status, :location, :starts_with)).last(12)</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>Administration::EmployeesController</td>
+      <td>index</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context6');toggle('message6');toggle('full_message6')" ><span id='message6' style='display:block' >Possible SQL injection near line 14: User.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;) + sort_d...</span><span id='full_message6' style='display:none'>Possible SQL injection near line 14: User.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;) + sort_direction))</span><table id='context6' class='context' style='display:none'><caption>app/controllers/administration/employees_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>9</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  before_action :set_employee, only: [:show, :edit, :update]</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>11</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  helper_method :sort_column, :sort_direction</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>13</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def index </pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>14</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>15</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #@employee = User.paginate(:page =&gt; params[:page], :per_page =&gt; 10).order(last_name: :desc)</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>16</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>18</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def all</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>19</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.manufacturers.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>Administration::EmployeesController</td>
+      <td>all</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context7');toggle('message7');toggle('full_message7')" ><span id='message7' style='display:block' >Possible SQL injection near line 19: User.manufacturers.search(params[:search]).order(((<span class="user_input">sort_column</span> +...</span><span id='full_message7' style='display:none'>Possible SQL injection near line 19: User.manufacturers.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;) + sort_direction))</span><table id='context7' class='context' style='display:none'><caption>app/controllers/administration/employees_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>14</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    @employees = User.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>15</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #@employee = User.paginate(:page =&gt; params[:page], :per_page =&gt; 10).order(last_name: :desc)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>16</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>18</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def all</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>19</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.manufacturers.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def administrators</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.administrators.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>Administration::EmployeesController</td>
+      <td>administrators</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context8');toggle('message8');toggle('full_message8')" ><span id='message8' style='display:block' >Possible SQL injection near line 23: User.administrators.search(params[:search]).order(((<span class="user_input">sort_column</span> ...</span><span id='full_message8' style='display:none'>Possible SQL injection near line 23: User.administrators.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;) + sort_direction))</span><table id='context8' class='context' style='display:none'><caption>app/controllers/administration/employees_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>18</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  def all</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>19</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.manufacturers.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def administrators</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.administrators.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def moderators</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.moderators.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>Administration::EmployeesController</td>
+      <td>moderators</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context9');toggle('message9');toggle('full_message9')" ><span id='message9' style='display:block' >Possible SQL injection near line 27: User.moderators.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; ...</span><span id='full_message9' style='display:none'>Possible SQL injection near line 27: User.moderators.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;) + sort_direction))</span><table id='context9' class='context' style='display:none'><caption>app/controllers/administration/employees_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>22</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  def administrators</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.administrators.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def moderators</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.moderators.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def operators</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.operators.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end </pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>Administration::EmployeesController</td>
+      <td>operators</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context10');toggle('message10');toggle('full_message10')" ><span id='message10' style='display:block' >Possible SQL injection near line 31: User.operators.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;...</span><span id='full_message10' style='display:none'>Possible SQL injection near line 31: User.operators.search(params[:search]).order(((<span class="user_input">sort_column</span> + &quot; &quot;) + sort_direction))</span><table id='context10' class='context' style='display:none'><caption>app/controllers/administration/employees_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>26</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  def moderators</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.moderators.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def operators</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @employees = User.operators.search(params[:search]).order(sort_column + &quot; &quot; + sort_direction).paginate(:per_page =&gt; 10, :page =&gt; params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end </pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def show </pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>35</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #redirect_to user_path(params[:id]) </pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>36</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end </pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>Catalog::TrademarksController</td>
+      <td>update</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/redirect/">Redirect</a></td>
+      <td><div class='warning_message' onClick="toggle('context1');toggle('message1');toggle('full_message1')" ><span id='message1' style='display:block' >Possible unprotected redirect near line 50: redirect_to(Catalog::Trademark.find(<span class="user_input">params[:id]</span>), :notice...</span><span id='full_message1' style='display:none'>Possible unprotected redirect near line 50: redirect_to(Catalog::Trademark.find(<span class="user_input">params[:id]</span>), :notice =&gt; &quot;Trademark was successfully updated.&quot;)</span><table id='context1' class='context' style='display:none'><caption>app/controllers/catalog/trademarks_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>45</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  # PATCH/PUT /catalog/trademarks/1</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>46</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  # PATCH/PUT /catalog/trademarks/1.json</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>47</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def update</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>48</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    respond_to do |format|</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>49</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      if @catalog_trademark.update(catalog_trademark_params)</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>50</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        format.html { redirect_to @catalog_trademark, notice: &#39;Trademark was successfully updated.&#39; }</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>51</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        format.json { render :show, status: :ok, location: @catalog_trademark }</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>52</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      else</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>53</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        format.html { render :edit }</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>54</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        format.json { render json: @catalog_trademark.errors, status: :unprocessable_entity }</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>55</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      end</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+  </tbody>
+</table>
+<p>View Warnings</p>
+<table>
+  <thead>
+    <tr>
+      <th>Confidence</th>
+      <th>Template</th>
+      <th>Warning Type</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          administration/companies/show (Administration::CompaniesController#create)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context11');toggle('message11');toggle('full_message11')" >Unescaped model attribute near line 27: Company.new(company_params).description<table id='context11' class='context' style='display:none'><caption>app/views/administration/companies/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>22</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                        &lt;h2 class=&quot;no-margins&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= @company.name %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/h2&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h4&gt;&lt;%#= raw current_user.post %&gt; &lt;%#= raw current_user.company.name if current_user.company %&gt;&lt;/h4&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= raw @company.description %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          administration/customers/show (Administration::CustomersController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context12');toggle('message12');toggle('full_message12')" >Unescaped model attribute near line 25: User.find(params[:id]).post<table id='context12' class='context' style='display:none'><caption>app/views/administration/customers/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>20</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                &lt;div class=&quot;&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h2 class=&quot;no-margins&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= @customer.last_name + &quot; &quot; + @customer.first_name + &quot; &quot; + @customer.middle_name %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/h2&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h4&gt;&lt;%= raw @customer.post %&gt; &lt;%= raw @customer.company.name if @customer.company %&gt;&lt;/h4&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= raw @customer.about %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          administration/customers/show (Administration::CustomersController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context13');toggle('message13');toggle('full_message13')" >Unescaped model attribute near line 27: User.find(params[:id]).about<table id='context13' class='context' style='display:none'><caption>app/views/administration/customers/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>22</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                        &lt;h2 class=&quot;no-margins&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= @customer.last_name + &quot; &quot; + @customer.first_name + &quot; &quot; + @customer.middle_name %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/h2&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h4&gt;&lt;%= raw @customer.post %&gt; &lt;%= raw @customer.company.name if @customer.company %&gt;&lt;/h4&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= raw @customer.about %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          administration/customers/show (Administration::CustomersController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context14');toggle('message14');toggle('full_message14')" >Unescaped model attribute near line 78: User.find(params[:id]).about<table id='context14' class='context' style='display:none'><caption>app/views/administration/customers/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>73</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>        &lt;div class=&quot;col-lg-3&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>74</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;div class=&quot;ibox&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>75</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;div class=&quot;ibox-content&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>76</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;h3&gt;Об &lt;%= @customer.last_name + &quot; &quot; + @customer.first_name + &quot; &quot; + @customer.middle_name %&gt;&lt;/h3&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>77</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;p class=&quot;small&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>78</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;%= raw @customer.about %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>79</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>80</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;p class=&quot;small font-bold&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>81</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;span&gt;&lt;i class=&quot;fa fa-circle text-navy&quot;&gt;&lt;/i&gt; Online status&lt;/span&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>82</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>83</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          administration/employees/show (Administration::EmployeesController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context15');toggle('message15');toggle('full_message15')" >Unescaped model attribute near line 26: User.find(params[:id]).post<table id='context15' class='context' style='display:none'><caption>app/views/administration/employees/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>21</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                        &lt;div class=&quot;&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;h2 class=&quot;no-margins&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                    &lt;%= @employee.last_name + &quot; &quot; + @employee.first_name + &quot; &quot; + @employee.middle_name %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;/h2&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;h4&gt;&lt;%= raw @employee.post %&gt; &lt;%= raw @employee.company.name if @employee.company %&gt;&lt;/h4&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                    &lt;%= raw @employee.about %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;/small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          administration/employees/show (Administration::EmployeesController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context16');toggle('message16');toggle('full_message16')" >Unescaped model attribute near line 28: User.find(params[:id]).about<table id='context16' class='context' style='display:none'><caption>app/views/administration/employees/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>23</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                                &lt;h2 class=&quot;no-margins&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                    &lt;%= @employee.last_name + &quot; &quot; + @employee.first_name + &quot; &quot; + @employee.middle_name %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;/h2&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;h4&gt;&lt;%= raw @employee.post %&gt; &lt;%= raw @employee.company.name if @employee.company %&gt;&lt;/h4&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                    &lt;%= raw @employee.about %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;/small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          catalog/companies/show (Catalog::CompaniesController#create)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context17');toggle('message17');toggle('full_message17')" >Unescaped model attribute near line 38: Company.new(company_params).description<table id='context17' class='context' style='display:none'><caption>app/views/catalog/companies/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>33</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                    &lt;div&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h2 class=&quot;no-margins&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>35</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= @company.name %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>36</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/h2&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>37</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h4&gt;&lt;%#= raw current_user.post %&gt; &lt;%#= raw current_user.company.name if current_user.company %&gt;&lt;/h4&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>38</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>39</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= raw @company.description %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>40</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>41</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>42</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>43</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          catalog/customers/show (Catalog::CustomersController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context18');toggle('message18');toggle('full_message18')" >Unescaped model attribute near line 25: User.find(params[:id]).post<table id='context18' class='context' style='display:none'><caption>app/views/catalog/customers/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>20</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                &lt;div class=&quot;&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h2 class=&quot;no-margins&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= full_name_user(@customer) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/h2&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h4&gt;&lt;%= raw @customer.post %&gt; &lt;%= raw @customer.company.name if not @customer.company.nil? %&gt;&lt;/h4&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= raw @customer.about %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          catalog/customers/show (Catalog::CustomersController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context19');toggle('message19');toggle('full_message19')" >Unescaped model attribute near line 27: User.find(params[:id]).about<table id='context19' class='context' style='display:none'><caption>app/views/catalog/customers/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>22</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                        &lt;h2 class=&quot;no-margins&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= full_name_user(@customer) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/h2&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h4&gt;&lt;%= raw @customer.post %&gt; &lt;%= raw @customer.company.name if not @customer.company.nil? %&gt;&lt;/h4&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= raw @customer.about %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          catalog/customers/show (Catalog::CustomersController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context20');toggle('message20');toggle('full_message20')" >Unescaped model attribute near line 81: User.find(params[:id]).about<table id='context20' class='context' style='display:none'><caption>app/views/catalog/customers/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>76</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>        &lt;div class=&quot;col-lg-3&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>77</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;div class=&quot;ibox&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>78</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;div class=&quot;ibox-content&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>79</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;h3&gt;Об &lt;%= @customer.last_name + &quot; &quot; + @customer.first_name + &quot; &quot; + @customer.middle_name %&gt;&lt;/h3&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>80</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;p class=&quot;small&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>81</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;%= raw @customer.about %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>82</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>83</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;p class=&quot;small font-bold&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>84</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;span&gt;&lt;i class=&quot;fa fa-circle text-navy&quot;&gt;&lt;/i&gt; Online status&lt;/span&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>85</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>86</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>
+        
+          categories/show (CategoriesController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context21');toggle('message21');toggle('full_message21')" >Unescaped model attribute near line 34: Category.new.description<table id='context21' class='context' style='display:none'><caption>app/views/categories/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>29</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                        &lt;tbody&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                          &lt;% @categories.each do |c| %&gt; </pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;tr&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;td&gt;&lt;%= c.id %&gt;&lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;td&gt;&lt;%= c.name %&gt;&lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;td&gt;&lt;%= raw c.description %&gt;&lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>35</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;td&gt;&lt;%= c.id %&gt;&lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>36</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;td&gt;&lt;%#= c.active %&gt;&lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>37</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;td&gt;&lt;span class=&quot;label label-primary&quot;&gt;&lt;%#= c.active %&gt;&lt;/span&gt;&lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>38</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                &lt;td class=&quot;text-right&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>39</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                                    &lt;div class=&quot;btn-group&quot;&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>
+        
+          companies/index (CompaniesController#index)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context22');toggle('message22');toggle('full_message22')" >Unescaped model attribute near line 29: <span class="user_input">current_user.company.description</span><table id='context22' class='context' style='display:none'><caption>app/views/companies/index.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>24</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                        &lt;h2 class=&quot;no-margins&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= @company.name %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/h2&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h4&gt;&lt;%#= raw current_user.post %&gt; &lt;%#= raw current_user.company.name if current_user.company %&gt;&lt;/h4&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= raw @company.description %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>
+        
+          companies/show (CompaniesController#create)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context23');toggle('message23');toggle('full_message23')" >Unescaped model attribute near line 30: <span class="user_input">current_user.build_company(company_params).description</span><table id='context23' class='context' style='display:none'><caption>app/views/companies/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>25</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                        &lt;h2 class=&quot;no-margins&quot;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= @company.name %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/h2&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;h4&gt;&lt;%#= raw current_user.post %&gt; &lt;%#= raw current_user.company.name if current_user.company %&gt;&lt;/h4&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                            &lt;%= raw @company.description %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                        &lt;/small&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>35</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+  </tbody>
+</table>
+</body></html>

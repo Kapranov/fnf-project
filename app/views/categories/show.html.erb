@@ -1,0 +1,59 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Каталог - список категорий</h2>
+        <ol class="breadcrumb">
+            <li><a href="<%= dashboard_path %>">Главная</a>
+            <li><a>Каталог</a></li>
+            <li class="active"><strong>Список категорий</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+<div class="wrapper wrapper-content ecommerce">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                        <thead>
+                            <tr>
+                              <th>ID</th>
+                                <th data-toggle="true">Название</th>
+                                <th>Описание</th>
+                                <th>Статус</th>
+                                <th class="text-right" data-sort-ignore="true">Действие</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <% @categories.each do |c| %> 
+                            <tr>
+                                <td><%= c.id %></td>
+                                <td><%= c.name %></td>
+                                <td><%= raw c.description %></td>
+                                <td><%= c.id %></td>
+                                <td><%#= c.active %></td>
+                                <td><span class="label label-primary"><%#= c.active %></span></td>
+                                <td class="text-right">
+                                    <div class="btn-group">
+                                        <%= link_to content_tag(:i, nil, class: "fa fa-eye") + " " + "Просмотр", c, class: "btn-white btn btn-xs" %>
+                                        <%#= link_to content_tag(:i, nil, class: "fa fa-pencil") + " " + "Править", edit_category_path(c), class: "btn-white btn btn-xs" %>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% end %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">
+                                    <ul class="pagination pull-right"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Мои избранные товары</h2>
+        <ol class="breadcrumb">
+            <li><a href="<%= root_path %>">Главная</a></li>
+            <li><a>Моя учётная запись</a></li>
+            <li class="active">
+                <strong>Мои избранные товары</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <% @my_favorite_products.each_slice(4) do |products_group| %>
+    <div class="row">
+        <% products_group.each do |product| %>
+        <div class="col-md-3">
+            <div class="ibox">
+                <div class="ibox-content product-box">
+                    <% product.product_images.first(1).each do |i| %>
+                       <%= image_tag i.image_url(:large_thumb), style: "width: 260px; height: 200px;" %>
+                    <% end %>
+                    <% if product.product_images.empty? %>
+                    <div class="product-imitation">
+                        [ НЕТ ФОТО ]
+                    </div>
+                    <% end %>
+                    <div class="product-desc">
+                        <span class="product-price">
+                            <%= product.price %> Грн.
+                        </span>
+                        <small data-toggle="tooltip" title="<%= product.category.name if product.category.name %>" class="text-muted"><%= product.category.name.truncate(30) if product.category.name %></small>
+                        <a href="<%= catalog_product_path(product) %>" data-toggle="tooltip" title="<%= product.name if product.name %>" class="product-name"> <%= product.name.truncate(20) if product.name %></a>
+                        <div class="small m-t-xs">
+                            <%= sanitize(product.description.truncate(60)) if product.description %>
+                        </div>
+                        <div class="m-t text-righ">
+                            <%= link_to "Подробнее", catalog_product_path(product), class: "btn btn-xs btn-outline btn-primary" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+    <% end %>
+     <ul class="pagination pull-right"><%#= will_paginate @my_favorite_products %></ul>
+</div>
+<% if @my_favorite_products.empty? %>
+    <div class="wrapper wrapper-content">
+        <div class="middle-box text-center animated fadeInRightBig">
+            <h3 class="font-bold">Нет избраных товаров</h3>
+            <div class="error-desc">
+                У Вас еще нет избраных товаров перейдите в католог товаров и добавьте Вам нужный товар.
+                <br>
+                <%= link_to "Перейти в католог товаров", catalog_products_path, class:"btn btn-primary m-t" %>
+            </div>
+        </div>
+    </div>
+<% end %>

@@ -1,0 +1,188 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Сотрудники</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Главная</a>
+            </li>
+            <li class="active">
+                <strong>Сотрудники</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+
+  <%#= render :partial => 'employees' %> 
+
+ <div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <span class="text-muted small pull-right">Текущее время: <i class="fa fa-clock-o"></i> <%= localize Time.now, :format => '%T, %A %d %B' %></span>
+                    <h2>Дистрибьюторы <span class="badge badge-primary"><%= User.distributors.count %></span></h2>
+                    <p>All clients need to be verified before you can send email and set a project.</p>
+                    
+                        <%= form_tag distributors_administration_customers_path, :method => 'get', :id => "customers_search" do %>
+                        <div class="input-group">
+                                <%= text_field_tag :search, params[:search], placeholder: "Поиск сотрудника", class: "input form-control" %>
+                                <span class="input-group-btn">
+                                <%#= submit_tag "Поиск", type: "button", class: "btn btn btn-primary" %>
+                                <%#= button_tag  "Поиск", type: 'button', class: "btn btn btn-primary" %>
+                                <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Поиск</button>
+                                </span>
+                            
+                        </div>        
+                        <% end %>
+                        <!-- <input type="text" placeholder="Поиск сотрудника" class="input form-control">
+                        <span class="input-group-btn">
+                                <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Поиск</button>
+                        </span> -->
+                    
+                    <div class="clients-list">
+                        <div class="full-height-scroll">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <tbody>
+                                    <% @customers.each do |u| %> 
+                                    <tr>
+                                        <td><span class="small"><i class="fa fa fa-circle text-navy"> </i></span></td>
+                                        <td class="client-avatar"> <%= image_tag u.avatar.url(:thumb), class: "img-circle", style: "width: 52px; height: 52px;" %></td>
+                                        <td><a data-toggle="tab" href="#client-<%= u.id %>" class="client-link"><span data-toggle="tab" title="<%= full_name_user(u) %>"><%= sanitize(full_name_user(u).truncate(20)) %></span></a></td>
+                                        <td class="contact-type"><i class="fa fa fa-key"> </i></td>
+                                        <td> <%= sanitize(t(u.role_name, :scope => '.role_name').truncate(21)) %></td>
+                                        <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+                                        <td> <%= u.email %></td>
+                                        
+                                    </tr>
+                                    <% end %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="customers"><%= render 'customers' %></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox ">
+                <div class="ibox-content">
+                    <div class="tab-content">
+                        <% @customers.each do |c| %> 
+                        <div id="client-<%= c.id %>" class="tab-pane active">
+                            <div class="row m-b-lg">
+
+                                <div class="col-lg-12 text-center">
+                                <h2><%= full_name_user(c)%></h2>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="m-b-sm">
+                                         <%= image_tag c.avatar.url(:thumb), class: "img-circle", style: "width: 80px; height: 80px;" %>
+                                    <span class="text-muted small text-center"><i class="fa fa fa-circle text-navy"> </i>  <%= sanitize(t(c.role_name, :scope => '.role_name').truncate(21)) %></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+
+                                    <strong>Обо мне</strong>
+                                    <p><%= raw c.about %></p>
+                                    <%= link_to "Посмотреть профиль", administration_customer_path(c), class: "btn btn-primary btn-sm btn-block" %>
+                                    <!-- <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Отправить сообщение</button> -->
+                                </div>
+                            </div>
+                            <div class="client-detail">
+                                <div class="full-height-scroll">
+                                    <strong>Последняя активность</strong>
+                                    <% @activities = PublicActivity::Activity.order(created_at: :desc).where(owner_id: c.id, owner_type: "User") %>
+                                    <ul class="list-group clear-list">
+                                    
+                                    <% @activities.each do |activity| %>
+                                        <li class="list-group-item fist-item">
+                                            <span class="text-muted small pull-right">  <%= localize c.created_at, :format => '%T, %A' %> </span>
+                                            <%= render_activity activity %>
+                                        </li>
+                                    <% end %>
+                                    <%= "Пользователь не совершал действий!" if @activities.empty? %>
+                                    </ul>
+                                    <strong>Примечания</strong>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua.
+                                    </p>
+                                    <hr>
+                                    <strong>Хронология деятельности</strong>
+                                    <div id="vertical-timeline" class="vertical-container dark-timeline">
+                                        <div class="vertical-timeline-block">
+                                            <div class="vertical-timeline-icon gray-bg">
+                                                <i class="fa fa-coffee"></i>
+                                            </div>
+                                            <div class="vertical-timeline-content">
+                                                <p>Conference on the sales results for the previous year.
+                                                </p>
+                                                <span class="vertical-date small text-muted"> 2:10 pm - 12.06.2014 </span>
+                                            </div>
+                                        </div>
+                                        <div class="vertical-timeline-block">
+                                            <div class="vertical-timeline-icon gray-bg">
+                                                <i class="fa fa-briefcase"></i>
+                                            </div>
+                                            <div class="vertical-timeline-content">
+                                                <p>Many desktop publishing packages and web page editors now use Lorem.
+                                                </p>
+                                                <span class="vertical-date small text-muted"> 4:20 pm - 10.05.2014 </span>
+                                            </div>
+                                        </div>
+                                        <div class="vertical-timeline-block">
+                                            <div class="vertical-timeline-icon gray-bg">
+                                                <i class="fa fa-bolt"></i>
+                                            </div>
+                                            <div class="vertical-timeline-content">
+                                                <p>There are many variations of passages of Lorem Ipsum available.
+                                                </p>
+                                                <span class="vertical-date small text-muted"> 06:10 pm - 11.03.2014 </span>
+                                            </div>
+                                        </div>
+                                        <div class="vertical-timeline-block">
+                                            <div class="vertical-timeline-icon navy-bg">
+                                                <i class="fa fa-warning"></i>
+                                            </div>
+                                            <div class="vertical-timeline-content">
+                                                <p>The generated Lorem Ipsum is therefore.
+                                                </p>
+                                                <span class="vertical-date small text-muted"> 02:50 pm - 03.10.2014 </span>
+                                            </div>
+                                        </div>
+                                        <div class="vertical-timeline-block">
+                                            <div class="vertical-timeline-icon gray-bg">
+                                                <i class="fa fa-coffee"></i>
+                                            </div>
+                                            <div class="vertical-timeline-content">
+                                                <p>Conference on the sales results for the previous year.
+                                                </p>
+                                                <span class="vertical-date small text-muted"> 2:10 pm - 12.06.2014 </span>
+                                            </div>
+                                        </div>
+                                        <div class="vertical-timeline-block">
+                                            <div class="vertical-timeline-icon gray-bg">
+                                                <i class="fa fa-briefcase"></i>
+                                            </div>
+                                            <div class="vertical-timeline-content">
+                                                <p>Many desktop publishing packages and web page editors now use Lorem.
+                                                </p>
+                                                <span class="vertical-date small text-muted"> 4:20 pm - 10.05.2014 </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>           

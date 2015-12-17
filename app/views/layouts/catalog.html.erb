@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : 'Fnf' %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : 'Fnf Zettheme' %>">
+    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag "plugins/toastr/toastr.min" %>
+    <%= yield :css %>
+    <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <%#= render 'layouts/catalog_navigation' %>
+        <div class="gray-bg">
+            <%= render 'layouts/catalog_topnavbar' %>
+            <%= raw yield.html_safe %>
+            <%= render 'layouts/catalog_footer' %>
+            <%#= render 'layouts/dashboards_chat_box' %> 
+        </div>
+    </div>
+
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "plugins/toastr/toastr.min" %>
+    <!-- Custom and plugin javascript -->
+    <%= javascript_include_tag "fnf" %>
+    <%= javascript_include_tag "plugins/pace/pace.min" %>
+
+    <%= yield :js %>
+    <% if flash[:toastr] %>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+            <% flash[:toastr].each do |type, message| %>
+              toastr.<%= type %>('<%= message %>');
+            <% end %>
+            }, 300);
+        });
+        </script>
+    <% end %>
+
+</body>
+</html>

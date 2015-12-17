@@ -1,0 +1,23 @@
+<% if signed_in? %>
+  <% if current_user.likes?(@product)  %>
+      <% if @product.likers(User).count > 1 %>
+        Вам и еще <% @product.likers(User).reject {|i| i == current_user}.each do |liker|  %> 
+          <%= link_to full_name_user(liker), catalog_customer_path(liker) %> 
+        <% end %> 
+        это понравилось. 
+      <% elsif @product.likers(User).count >= 4  %>
+        Вам и еще <%= @product.likers(User).count %> это понравилось.
+      <% else %>
+      Вам это нравится.
+      <% end %>
+  <% elsif @product.likers(User).count <= 3  %>
+    <% @product.likers(User).reject {|i| i == current_user}.each do |liker|  %> 
+          <%= link_to full_name_user(liker), catalog_customer_path(liker) %> 
+        <% end %> 
+    это понравилось.
+  <% else %>
+      <%= @product.likers(User).count %> пользователям это нравится
+  <% end %>
+<% end %>
+
+ 

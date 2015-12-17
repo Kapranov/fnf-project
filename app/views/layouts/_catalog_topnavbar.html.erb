@@ -1,0 +1,86 @@
+<div class="row border-bottom">
+    <div class="col-md-12">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+            
+            
+            <div class="navbar-header">
+                <!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> -->
+                 
+                <a class="navbar-brand" href="#">FNF</a>
+                <form role="search" class="navbar-form-custom" action="search_results.html">
+                    <div class="input-group">
+                        <input type="text" placeholder="Поиск..." class="form-control" name="top-search" id="top-search">
+                        <span class="input-group-btn">
+                            <button name="button" type="submit" class="btn btn-default btn btn btn-primary"><i class="fa fa-search"></i>
+                                        Поиск</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            
+            <% if user_signed_in? %>
+            <ul class="nav navbar-top-links navbar-left">
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        Быстрый доступ
+                    </a>
+                    
+                    <ul class="dropdown-menu animated fadeInUp">
+                    <% if not self.controller_path.include? "catalog" %>
+                        <li><%= link_to "Перейти на главную страницу каталога", root_path %></li>
+                    <% else %>
+                        
+                        <li><%= link_to "Перейти на страницу управления",    dashboard_path %></li>
+                    <% end %>
+                    </ul>
+
+                </li>
+            </ul>
+
+            <% end %>
+            <ul class="nav navbar-top-links navbar-right">
+                <% if user_signed_in? %>
+                <% if current_user.role_name == "admin" %>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning"><%= PublicActivity::Activity.count %></span>
+                    </a>
+                    <% @activities = PublicActivity::Activity.all.limit(10).order("created_at desc") %>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <% @activities.each do |activity| %>
+                        <li>
+                            <div class="dropdown-messages-box">
+                                <a href="<%= profile_path %>" class="pull-left">
+                                    <%= image_tag activity.owner.avatar.url(:thumb), class: "img-circle", style: "width: 52px;" if activity.owner  %>
+                                </a>
+                                <div class="media-body">
+                                    <strong><%= "#{activity.owner.last_name} #{activity.owner.first_name}" if activity.owner %></strong>  <%= render_activity activity %></strong>. <br>
+                                    <small class="text-muted"><%= time_ago_in_words(activity.created_at) %> <%= 'назад' %></small>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <% end %>
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="<%= administration_activities_path %>">
+                                    <i class="fa fa-envelope"></i> <strong> Все действия </strong>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <% end %>
+                <li><%= link_to  image_tag(current_user.avatar.url(:thumb), class: " ", style: "width: 20px; height: 20px;" , alt: current_user.first_name) + " #{current_user.first_name}", dashboard_path, data: { toggle: "tooltip", placement: "bottom" }, title: "Профиль"  %></li>
+                <% if controller.send(:_layout) == "catalog" %>
+                    
+                <% end %>
+                    <li><%= link_to content_tag(:i, nil, class: "fa fa-sign-out") + " " + "Выйти", destroy_user_session_path, :method => :delete %></li>
+                <% else %>
+                    <li><%= link_to content_tag(:i, nil, class: "fa fa-edit") + " " + "Зарегистрироваться",new_user_registration_path %></li>
+                    <li><%= link_to content_tag(:i, nil, class: "fa fa-sign-in") + " " + "Войти", new_user_session_path %></li>
+                <% end %>
+            </ul>
+        </nav>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+<%= form_for([:administration, @trademark], :html => { :multipart => true }) do |f| %>
+    <% if @trademark.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@trademark.errors.count, "error") %> prohibited this trademark from being saved:</h2>
+            <ul>
+            <% @trademark.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="wrapper wrapper-content ecommerce">
+        <div class="ibox">
+            <div class="ibox-title">
+                <% if @trademark.new_record? %>
+                <h5>Создание торговой марки <small>в самом большом Украинском каталоге</small></h5>
+                <% else %>
+                <h5>Редактирование торговой марки <small>в самом большом Украинском каталоге</small></h5>
+                <% end %>
+                <div class="ibox-tools">
+                    <%= link_to content_tag(:i, nil, class: "fa fa-plus") + " " + "Добавить новый товар", new_product_path, class: "btn-primary btn btn-xs" %>
+                </div>
+            </div>
+            <div class="ibox-content m-b-sm border-bottom">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tabs-container">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab-information">Информация</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-seo">СЕО</a></li>
+                            </ul>
+                            
+                            <div class="tab-content">
+                                <div id="tab-information" class="tab-pane active">
+                                    <div class="panel-body">
+                                        <fieldset class="form-horizontal">
+                                            <div class="form-group">
+                                            <label class="col-sm-2 control-label">Название:</label>
+                                                <div class="col-sm-10">
+                                                    <%= f.text_field :name, placeholder: "Название торговой марки", class: "form-control" %>
+                                                    <span class="help-block m-b-none">Общеизвестное название для этого товара. Недопустимые символы <>;=#{}</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Дата регистрации:</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="03/04/2014">
+                                                    </div>
+
+                                                    <%= f.text_field :registration_date, placeholder: "дата регистрации", class: "form-control" %>
+                                                    <span class="help-block m-b-none">Это тип кода товара, широко используется в США, Канаде, Великобритании, Австралии, Новой Зеландии и в других странах.</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                            <label class="col-sm-2 control-label">Описание:</label>
+                                                <div class="col-sm-10">
+                                                    <%= f.text_area :description, style: "width: 100%; height: 100%;", class: "summernote" %>
+                                                    <span class="help-block m-b-none">Описание появляется в середине страницы товара.</span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div id="tab-seo" class="tab-pane">
+                                    <div class="panel-body">
+                                        <fieldset class="form-horizontal"> 
+                                            <div class="form-group">
+                                            <label class="col-sm-2 control-label">Мета заголовок:</label>
+                                                <div class="col-sm-10">
+                                                    <%= f.text_field :meta_title, placeholder: "Мета заголовок", class: "form-control" %>
+                                                     
+                                                    <span class="help-block m-b-none">Публичное название для страницы товара, и для поисковых систем. Оставьте пустым, чтобы использовать название товара. Количество оставшихся символов отображается в левой области.</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Мета описание:</label>
+                                                <div class="col-sm-10">
+                                                    <%= f.text_field :meta_description, placeholder: "Мета описание", class: "form-control" %>
+                                                     
+                                                    <span class="help-block m-b-none">Это описание появится в поисковых системах. Вам нужна простая фраза, короче 160 символов (включая пробелы).</span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <fieldset class="form-horizontal"> 
+                                <div class="form-group">
+                                    <div class="col-sm-2 col-sm-offset-2">
+                                        <%= link_to content_tag(:i, nil, class: "fa fa-close") + " " + "Отменить", administration_trademarks_path, class: "btn btn-default" %>
+                                    </div>
+                                    <div class="col-sm-8 pull-right">
+                                        <div class="pull-right">
+                                            <%= f.button type: 'submit', class: "btn btn-primary", data: { disable_with: (@trademark.new_record? ? "Создание торговой марки ..." : "Обновление торговой марки ...") } do %>
+                                            <%= content_tag(:i, nil, class: "fa fa-pencil") + " " + "Сохранить" %>
+                                            <% end %>
+                                            <%= f.button type: 'submit', name: "stay", class: "btn btn-primary", data: { disable_with: (@trademark.new_record? ? "Создание торговой марки ..." : "Обновление торговой марки ...") } do %>
+                                            <%= content_tag(:i, nil, class: "fa fa-pencil") + " " + "Сохранить и остаться" %>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>

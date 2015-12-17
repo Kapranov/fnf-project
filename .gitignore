@@ -1,0 +1,9 @@
+/.bundle
+/vendor/bundle/
+/vendor/ruby/
+db/*.sqlite3
+/db/*.sqlite3-journal
+/log/*
+/tmp/*
+.DS_Store
+/config/application.yml

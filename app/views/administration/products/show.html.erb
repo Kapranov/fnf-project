@@ -1,0 +1,100 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag "plugins/slick/slick" %>
+<%= stylesheet_link_tag "plugins/slick/slick-theme" %>
+<% end %>
+
+<% content_for :js do %>
+<%= javascript_include_tag "plugins/slick/slick.min" %>
+<script>
+    $(document).ready(function(){
+        $('.product-images').slick({
+            dots: true
+        });
+    });
+</script>
+<% end %>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Каталог - товары - Подробно о продукте - <%= @product.name %></h2>
+        <ol class="breadcrumb">
+            <li><a href="<%= administration_dashboard_path %>">Главная</a></li>
+            <li><a>Каталог</a></li>
+            <li><a href="<%= administration_products_path %>">Товары</a></li>
+            <li class="active"><strong>Подробно о продукте</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<p id="notice"><%= notice %></p>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox product-detail">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="product-images">
+                                <% @product_images.each do |i| %>
+                                  <%= image_tag i.image_url %>
+                                <% end %>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <h2 class="font-bold m-b-xs">
+                                <%= @product.name %> <!-- Титл продукта -->
+                            </h2>
+                            <small><%= @product.name %></small>
+                            <div class="m-t-md">
+                                <h2 class="product-main-price"><%= @product.price %> Грн.<small class="text-muted">Без НДС</small> </h2>
+                            </div>
+                            <hr>
+                            <h4>Описание продукта</h4>
+                            <div class="small text-muted">
+                                <ul>
+                                    <li>Артикул: <%= @product.reference %></li>
+                                    <!-- <li class="print">
+                                        <a href="javascript:print();">
+                                            Печать
+                                        </a>
+                                    </li> -->
+                                </ul>
+                            </div>
+                            <dl class="small m-t-md">
+                                <dt>Дополнительная информация</dt>
+                                <%= @product.description.html_safe if @product.description %>
+                                <!-- <dt>Дополнительная информация</dt>
+                                <dd>Банан - это ягода с кожаной оболочкой, скрывающей ароматный мучнистой мякоть. Сорта банана бывают разные, их около 100 видов, например: Дамский пальчик или Леди Фингер - имеют светло-желтый цвет мякоти и красно-коричневую толстую кожуру. Вкус мягкий, очень сладкий. Мы едим бананы под названием «карликовый Кавендиш» - цвет плода ярко-желтый, имеют толстую кожуру. В банане содержатся следующие элементы: крахмал, углеводы, ароматические вещества, клетчатка, пектиновые вещества, белки, яблочная кислота. Бананы богаты провитамином А, кальций, магний, содержащие большое количество калия, натрий, фосфор, железо, а также витамины РР, В1, В2, В6, а по витамину С банан не уступает цитрусовым.</dd>
+                                
+                                <dt>Euismod</dt>
+                                <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                                <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                                <dt>Malesuada porta</dt>
+                                <dd>Etiam porta sem malesuada magna mollis euismod.</dd> -->
+                            </dl>
+                            <hr>
+
+                            <div>
+                                <div class="btn-group">
+                                    <!-- Функция довать в корзину будет реализоваться в будующих версиях -->
+                                    <!-- <button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i> Добавить в корзину</button> -->
+                                    <%= link_to "Связаться с представителем", administration_customer_path(@product.user.id), class: "btn btn-primary btn-sm" %>
+                                    <!-- <button class="btn btn-white btn-sm"><i class="fa fa-envelope"></i> Связаться с представителем</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-footer">
+                    <span class="pull-right">
+                        Информация актуальна с - <i class="fa fa-clock-o"></i> <%= I18n.l @product.updated_at, format: :long  %>
+                    </span>
+                    Автор этой информации <%= link_to full_name_user(@product.user), administration_customer_path(@product.user) %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

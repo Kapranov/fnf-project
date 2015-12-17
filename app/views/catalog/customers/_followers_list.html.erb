@@ -1,0 +1,6 @@
+<% @customer.followers(User).each do |follower|  %>
+  <%= link_to(image_tag(follower.avatar.url(:profile), class: 'img-circle m-b-md'), catalog_customer_path(follower)) %>
+<% end %>
+<% if @customer.followers(User).empty? %>
+    У пользователя еще нет подписчиков!
+<% end %>

@@ -1,0 +1,107 @@
+
+<%#= render "list" %>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Каталог - список категорий</h2>
+        <ol class="breadcrumb">
+            <li><a href="<%= administration_dashboard_path %>">Главная</a></li>
+            <li><a>Каталог</a></li>
+            <li><a href="<%= administration_products_path %>">Категории</a></li>
+            <li class="active"><strong>Список категорий</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+        <%= link_to content_tag(:i, nil, class: "fa fa-plus") + " " + "Добавить категорию", new_administration_category_path, class: "btn-white btn btn-xs" %>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>Все категории в каталоге</h5>
+            <div class="ibox-tools">
+                <%= link_to content_tag(:i, nil, class: "fa fa-plus") + " " + "Добавить новую категорию", new_administration_category_path, class: "btn-primary btn btn-xs" %>
+            </div>
+        </div>
+        <%#= search_form_for @q, url: search_products_path, html: { method: :post }  do |f| %>
+        <div class="ibox-content m-b-sm border-bottom">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label" for="product_name">Название категории</label>
+                        <input type="text" id="category_name" name="category_name" value="" placeholder="Название категории" class="form-control">
+                        <%#= f.text_field :name_eq, placeholder: "Название товара", class: "form-control" %>
+                    </div>
+                </div>
+                 
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label" for="status">Статус</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="1" selected="">Активный
+                            <option value="0">Неактивный
+                        </select>
+                    </div>
+                </div>
+                <%#= submit_tag "Search" %>
+                <%#= submit_tag, class: 'btn btn btn-primary', :name => nil  do  %>
+                <%#= content_tag(:i, nil, class: "fa fa fa-search") + ' ' + "Поиск" %>
+                <%# end %>
+            </div>
+        </div>
+        <%# end %>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th data-toggle="true">Название</th>
+                                    <th>Описание</th>
+                                    <th>Колич. товаров</th>
+                                    <th class="text-right" data-sort-ignore="true">Действие</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @categories.each do |category| %>
+                                <tr>
+                                    <% if category.status == "published" %> 
+                                    <td><span class="small" data-toggle="tooltip" data-placement="top" title="<%= t(category.status, :scope => 'category_status') %>"><i class="fa fa fa-circle text-navy"> </i></span></td>
+                                    <% else %>
+                                    <td><span class="small" data-toggle="tooltip" data-placement="top" title="<%= t(category.status, :scope => 'category_status') %>"><i class="fa fa fa-circle text-danger"> </i></span></td>
+                                    <% end %>
+                                    <td><%= link_to  category.name, administration_category_path(category), data: { toggle: "tooltip", placement: "top" }, title: "Перейти в категорию #{category.name}" %></td>
+                                    
+                                    <td><%= raw category.description.truncate(100) if category.description %></td>
+                                    <td><%= category.products.count if category.products %></td>
+                                    <td class="text-right">
+                                        <div class="btn-group-action">
+                                            <div class="btn-group pull-right">
+                                                <%= link_to content_tag(:i, nil, class: "fa fa-eye") + " " + "Просмотр", administration_category_path(category), class: "btn-white btn btn-xs" %>
+                                                <button data-toggle="dropdown" class="btn btn-white btn-xs dropdown-toggle" type="button"><span class="caret"></span></button>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li><%= link_to content_tag(:i, nil, class: "fa fa-pencil") + " " + "Править", edit_administration_category_path(category) %></li>
+                                                    <li class="divider"></li>
+                                                    <li><%= link_to content_tag(:i, nil, class: "fa fa-trash") + " " + 'Удалить', administration_category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6">
+                                        <ul class="pagination pull-right"><%= will_paginate @categories %></ul>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

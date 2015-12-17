@@ -1,0 +1,15 @@
+<%= render partial: 'sidebar' %>
+<%= render partial: 'role', locals: { role: @roles.first } %>
+ 
+      
+      <div class="row">
+        <div class="col-md-3 manage_panel">
+          <%= yield :role_sidebar %>
+        </div>
+        <div class="col-md-9 main_content">
+          <%= render partial: 'the_notification/flash', locals: { format: :json } %>
+          <%= yield %>
+          <%= yield :role_main %>
+        </div>
+      </div>
+       

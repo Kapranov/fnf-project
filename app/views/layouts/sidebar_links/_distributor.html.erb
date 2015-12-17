@@ -1,0 +1,27 @@
+<li class="<%= cp(dashboard_path) %>">
+    <a href="<%= dashboard_path %>"><i class="fa fa-dashboard"></i> <span class="nav-label">Панель приборов</span></a>
+</li>
+
+ 
+ 
+<% if not current_user.company.nil? %>
+<% if current_user.company.name %>
+<li class="<%= cp(companies_path) %>">
+    <a href="<%= companies_path %>"><%= image_tag current_user.company.logo.url(:thumb), style: "width: 16px; height: 16px;", class: ' ' %> <span class="nav-label"><%= current_user.company.name.truncate(20) if current_user.company.name %></span></a>
+</li>
+
+<% else %>
+<li class="<%= cp(companies_path) %>">
+    <a href="<%= new_company_path %>"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Добавить компанию</span></a>
+</li>
+<% end %>
+<% end %>
+ 
+<li class="divider"></li>
+<li class="<%= cp(orders_path) or cp(orders_path) %>">
+    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Заказы</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li class="<%= cp(products_path) %>"><a href="<%= orders_path %>">Заказы</a></li>
+        <li class="<%= cp(categories_path) %>"><a href="<%= orders_path %>">Накладные</a></li>
+    </ul>
+</li>

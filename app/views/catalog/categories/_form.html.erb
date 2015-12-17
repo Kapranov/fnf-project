@@ -1,0 +1,116 @@
+<% content_for :css do %>
+
+<%= stylesheet_link_tag "plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote.css" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote-bs3.css" %>
+
+<% end %>
+
+<% content_for :js do %>
+<!-- iCheck -->
+<%= javascript_include_tag "plugins/iCheck/icheck.min" %>
+<!-- SUMMERNOTE -->
+<%= javascript_include_tag "plugins/summernote/summernote.min" %>
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote();
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+
+<% end %>
+
+<div class="wrapper wrapper-content ecommerce">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Создание категории <small>в самом большом Украинском каталоге</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <%= form_for(@category) do |f| %>
+                <div class="ibox-content">
+                    <fieldset class="form-horizontal">
+                        <div class="form-group"><label class="col-sm-2 control-label">Имя:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :name, placeholder: "Имя категории", class: "form-control" %>
+                                <span class="help-block m-b-none">Общеизвестное название для этой категории. Недопустимые символы <>;=#{}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Показывать:</label>
+                            <div class="col-sm-10">
+                                <div class="i-checks"><label> <input type="radio" value="1" name="yes"> <i></i> Да </label></div>
+                                <div class="i-checks"><label> <input type="radio" checked="" value="0" name="no"> <i></i> Нет </label></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Родительская категория:</label>
+                            <div class="col-sm-10">
+                                <%= f.select :parent_id, nested_set_options(Category, @category) {|i| "#{'-' * i.level} #{i.name}" } %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Описание:</label>
+                            <div class="col-sm-10">
+                                <!-- <div class="summernote"> -->
+                                    <%= f.text_area :description, style: "width: 100%; height: 100%;", placeholder: "Описание категории", class: "summernote" %>
+                                    <!-- <h3>Банан</h3>
+                                    Банан - это ягода с кожаной оболочкой, скрывающей ароматный мучнистой мякоть. Сорта банана бывают разные, их около 100 видов, например: Дамский пальчик или Леди Фингер - имеют светло-желтый цвет мякоти и красно-коричневую толстую кожуру. Вкус мягкий, очень сладкий. Мы едим бананы под названием «карликовый Кавендиш» - цвет плода ярко-желтый, имеют толстую кожуру. В банане содержатся следующие элементы: крахмал, углеводы, ароматические вещества, клетчатка, пектиновые вещества, белки, яблочная кислота. Бананы богаты провитамином А, кальций, магний, содержащие большое количество калия, натрий, фосфор, железо, а также витамины РР, В1, В2, В6, а по витамину С банан не уступает цитрусовым. -->
+                                <!-- </div> -->
+                                <span class="help-block m-b-none">Описание появляется в середине страницы товара.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Мета-заголовок:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :meta_title, placeholder: "Мета заголовок", class: "form-control" %>
+                                <span class="help-block m-b-none">Публичное название для страницы категории, и для поисковых систем. Оставьте пустым, чтобы использовать название категории. Количество оставшихся символов отображается в левой области.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Мета описание:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :meta_description, placeholder: "Мета описание", class: "form-control" %>
+                                <span class="help-block m-b-none">Это тип кода товара, широко используется в США, Канаде, Великобритании, Австралии, Новой Зеландии и в других странах.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Мета ключевые слова:</label>
+                            <div class="col-sm-10">
+                                <%= f.text_field :meta_keywords, placeholder: "Мета ключевые слова", class: "form-control" %>
+                                <span class="help-block m-b-none">Это тип кода товара, широко используется в США, Канаде, Великобритании, Австралии, Новой Зеландии и в других странах.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <%= f.submit "Сохранить", class: "btn btn-primary" %>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

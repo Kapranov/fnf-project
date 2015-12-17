@@ -1,0 +1,33 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag "plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote.css" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote-bs3" %>
+<%= stylesheet_link_tag "plugins/datapicker/datepicker3" %>
+
+<% end %>
+
+<% content_for :js do %>
+<!-- iCheck -->
+<%= javascript_include_tag "plugins/iCheck/icheck.min" %>
+<!-- SUMMERNOTE -->
+<%= javascript_include_tag "plugins/summernote/summernote.min" %>
+<%= javascript_include_tag "plugins/datapicker/bootstrap-datepicker" %>
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote();
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            $('.input-group.date').datepicker({
+                todayBtn: "linked",
+                language: "ru",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+        });
+    </script>
+<% end %>

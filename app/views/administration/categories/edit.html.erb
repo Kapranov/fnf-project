@@ -1,0 +1,13 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+
+        <h2>Редактирование категории - <%= @category.name %></h2>
+        <ol class="breadcrumb">
+            <li><a href="<%= administration_dashboard_path %>">Главная</a></li>
+            <li><a>Каталог</a></li>
+            <li><a href="<%= administration_categories_path %>">Категории</a></li>
+            <li class="active"><strong>Редактирование категории</strong></li>
+        </ol>
+    </div>
+</div>
+<%= render 'form' %>

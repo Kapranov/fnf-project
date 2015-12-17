@@ -1,0 +1,63 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag "plugins/iCheck/custom.css" %>
+<%= stylesheet_link_tag "plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox" %>
+<% end %>
+
+<% content_for :js do %>
+<!-- Jquery Validate -->
+<%= javascript_include_tag "plugins/validate/jquery.validate.min" %>
+
+<!-- iCheck -->
+<%= javascript_include_tag "plugins/iCheck/icheck.min" %>
+    <script>
+        $(document).ready(function () {
+            
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+<% end %>
+<div class="middle-box manufacturer_steps_screen animated fadeInDown">
+    <div class="text-center">
+        <h3>Добавьте свою компанию</h3>
+        <p>О Вашей компании теперь узнают все.</p>
+    </div>
+<%= form_for @company, method: :put, url: wizard_path do |f| %>
+    <% if f.object.errors.any? %>
+        <div class="error_messages">
+            <% f.object.errors.full_messages.each do |error| %>
+                <p><%= error %></p>
+            <% end %>
+        </div>
+    <% end %>
+
+    <div class="panel-body">
+        <fieldset class="form-horizontal"> 
+            <div class="form-group">
+            <label class="col-sm-2 control-label">Мета заголовок:</label>
+                <div class="col-sm-10">
+                    <%= f.text_field :meta_title, placeholder: "Мета заголовок", class: "form-control" %>
+                    <span class="help-block m-b-none">Публичное название для страницы компании, и для поисковых систем. Оставьте пустым, чтобы использовать название компании.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Мета описание:</label>
+                <div class="col-sm-10">
+                    <%= f.text_field :meta_description, placeholder: "Мета описание", class: "form-control" %>
+                    <span class="help-block m-b-none">Это описание появится в поисковых системах. Вам нужна простая фраза, короче 160 символов (включая пробелы).</span>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <%= f.submit 'Следующий шаг', class: "btn btn-primary" %>
+    <%= link_to "Пропустить этот шаг", next_wizard_path %>
+     
+<% end %>

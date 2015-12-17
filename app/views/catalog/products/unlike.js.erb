@@ -1,0 +1,7 @@
+<% if current_user.likes?(@product) %>
+  $('#like_button').html('<%= escape_javascript(render "unlike") %>');
+<% else %>
+  $('#like_button').html('<%= escape_javascript(render "like") %>');
+<% end %>
+
+$('#likers').html('<%= escape_javascript(render "likers") %>');

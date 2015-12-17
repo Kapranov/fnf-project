@@ -1,0 +1,42 @@
+<% t_scope = [ :the_role_gui, :roles, :new ] %>
+<%= render partial: 'sidebar' %>
+ 
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <%= raw t(:create, scope: t_scope) %>
+    </div>
+    <%= render partial: 'the_notification/form', locals: { object: @role } %>
+    <div class="panel-body">
+      <%= form_for(@role, url: administration_admin_roles_path, role: :form) do |f| %>
+        <label>
+          <%= t(:name, scope: t_scope) %>
+        </label>
+        <p>
+          <%= f.text_field :name, class: "form-control" %>
+        </p>
+        <label>
+          <%= t(:title, scope: t_scope) %>
+        </label>
+        <p>
+          <%= f.text_field :title, class: "form-control" %>
+        </p>
+        <label>
+          <%= t(:description, scope: t_scope) %>
+        </label>
+        <p>
+          <%= f.text_field :description, class: "form-control" %>
+        </p>
+        <% opts = options_for_select Role.all.map{|role| [ role.name, role.id ] } %>
+        <% unless opts.empty? %>
+          <div class="form-group">
+            <label>
+              <%= t(:based_on_role, scope: t_scope) %>
+            </label>
+            <%= f.select :based_on_role, opts, { include_blank: true }, class: "form-control" %>
+          </div>
+        <% end %>
+        <%= f.submit t(:create, scope: t_scope), class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+ 

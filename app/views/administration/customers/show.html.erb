@@ -1,0 +1,179 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Профиль</h2>
+            <ol class="breadcrumb">
+                <li><a href="<%= dashboard_path %>">Главная</a></li>
+                <li><a>Пользователи</a></li>
+                <li class="active"><strong>Профиль</strong></li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-6">
+            <div class="profile-image">
+                <%= image_tag @customer.avatar.url(@customer, :profile_image, :fill, 100, 100), class: 'img-circle circle-border m-b-md' %>
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            <%= full_name_user(@customer) %>
+                        </h2>
+                        <h4><%= raw @customer.post %> <%= raw @customer.company.name if @customer.company %></h4>
+                        <small>
+                            <%= raw @customer.about %>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <table class="table small m-b-xs">
+                <tbody>
+                <tr>
+                    <td>
+                        <strong>142</strong> Projects
+                    </td>
+                    <td>
+                        <strong>22</strong> Followers
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <strong>61</strong> Comments
+                    </td>
+                    <td>
+                        <strong>54</strong> Articles
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>154</strong> Tags
+                    </td>
+                    <td>
+                        <strong>32</strong> Friends
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3">
+            <small>Компания</small>
+            <h2 class="no-margins"><%= raw @customer.company.name if @customer.company %></h2>
+            <small>Торговая марка</small>
+            <h2 class="no-margins"><%= raw @customer.company unless @customer.trademarks.nil? %></h2>
+            <div id="sparkline1"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Об <%= full_name_user(@customer) %></h3>
+                    <p class="small">
+                        <%= raw @customer.about %>
+                    </p>
+                    <p class="small font-bold">
+                        <span><i class="fa fa-circle text-navy"></i> Online status</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Followers and friends</h3>
+                    <p class="small">
+                        If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
+                        anything embarrassing
+                    </p>
+                    <!-- <div class="user-friends">
+                        <a href=""><img alt="image" class="img-circle" src="img\a3.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a1.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a2.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a4.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a5.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a6.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a7.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a8.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a2.jpg"></a>
+                        <a href=""><img alt="image" class="img-circle" src="img\a1.jpg"></a>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Personal friends</h3>
+                    <ul class="list-unstyled file-list">
+                        <li><a href=""><i class="fa fa-file"></i> Project_document.docx</a></li>
+                        <li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
+                        <li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>
+                        <li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>
+                        <li><a href=""><i class="fa fa-file-powerpoint-o"></i> Presentation.pptx</a></li>
+                        <li><a href=""><i class="fa fa-file"></i> 10_08_2015.docx</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Приватное сообщение</h3>
+                    <p class="small">
+                        Отправить личное сообщение <%= full_user_name(@customer) %>
+                    </p>
+                    <div class="form-group">
+                        <label>Тема</label>
+                        <input type="email" class="form-control" placeholder="Тема сообщения">
+                    </div>
+                    <div class="form-group">
+                        <label>Сообщение</label>
+                        <textarea class="form-control" placeholder="Ваше сообщение" rows="3"></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-block">Отправить</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+        <% if @featured_products.try(:any?) %>
+            <% @featured_products.each_slice(2) do |products_group| %>
+                <div class="row">
+                    <% products_group.each do |product| %>
+                    <div class="col-md-6">
+                        <div class="ibox">
+                            <div class="ibox-content product-box">
+                                <% product.product_images.first(1).each do |i| %>
+                                   <%= image_tag i.image_url(:thumb), class: 'img-responsive' %>
+                                <% end %>
+                                <% if product.product_images.empty? %>
+                                <div class="product-imitation">
+                                    [ НЕТ ФОТО ]
+                                </div>
+                                <% end %>
+                                <div class="product-desc">
+                                    <span class="product-price">
+                                        <%= product.price %> Грн.
+                                    </span>
+                                    <small data-toggle="tooltip" title="<%= product.category.name if product.category.name %>" class="text-muted"><%= product.category.name.truncate(30) if product.category.name %></small>
+                                    <a href="<%= catalog_product_path(product.category_id, product) %>" data-toggle="tooltip" title="<%= product.name if product.name %>" class="product-name"> <%= product.name.truncate(20) if product.name %></a>
+                                    <div class="small m-t-xs">
+                                        <%= sanitize(product.description.truncate(60)) if product.description %>
+                                    </div>
+                                    <div class="m-t text-righ">
+                                        <%= link_to "Подробнее", catalog_product_path(product.category_id, product), class: "btn btn-xs btn-outline btn-primary" %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+            <% end %>
+        <% end %>
+        </div>
+    </div>
+</div>

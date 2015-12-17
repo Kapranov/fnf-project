@@ -1,0 +1,46 @@
+<div class="loginColumns">
+  <div class="row">
+    <div class="col-md-12">
+        <h1 class="text-muted text-center m-b">Авторизируйтесь</h1>
+    </div>
+    <div class="col-md-6">
+        <h2 class=" ">Добро пожаловать в FNF</h2>
+        <p>Вас приветствует огромный мир товаров.</p>
+
+        <p><strong>Для производителя</strong></p>
+        <p>На нашем сайте, у Вас есть возможность внести информацию о Вашей компании, торговых марках, производимых вами продуктах и связаться с вашими дистрибьюторами.</p>
+
+        <p><strong>Для дистрибьютора</strong></p>
+        <p class="text-danger">На нашем сайте у Вас есть возможность ознакомиться с товарами, а также связать с производителями товаров.</p> 
+
+        <p><strong>Для обычного пользователя</strong></p>
+        <p>На нашем сайте у Вас есть возможность просмотреть интересующие Вас товары и сохранить их в списке для удобной покупки в магазине.</p>
+        <p><small>bla bla blaaaassssllblld.</small></p>
+    </div>
+    <div class="col-md-6">
+        <div class="ibox-content">
+            <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
+                <%- flash.each do |name, msg| -%>
+                    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+                <%- end -%>   
+                <br>
+                <div class="form-group">
+                    <%= f.email_field :email, :autofocus => true, class: 'form-control', placeholder: "адрес электронной почты" %>
+                </div>
+                <div class="form-group">
+                    <%= f.password_field :password, class: 'form-control', placeholder: "Пароль" %>
+                </div>
+                <%= f.submit "Авторизация", :class => 'btn btn-primary block full-width m-b' %>
+                <%= link_to "Забыли пароль?", new_password_path(resource_name), class: 'right' %>
+                <p class="text-muted text-center">
+                    <small>Нет учетную записи?</small>
+                </p>
+                <%= link_to "Создать учетную запись", new_registration_path(resource_name), class: 'btn btn-sm btn-white btn-block' %>
+              <% end %>
+            <p class="m-t">
+                <small> &copy; <%= Time.now.year %></small>
+            </p>
+        </div>
+    </div>
+</div>
+</div>

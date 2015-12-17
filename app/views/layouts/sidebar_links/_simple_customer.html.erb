@@ -1,0 +1,16 @@
+<li class="<%= cp(dashboard_path) %>">
+    <a href="<%= dashboard_path %>"><i class="fa fa-th-large"></i> <span class="nav-label">Панель приборов</span></a>
+</li>
+
+<li class="<%= cp(products_path) %>">
+    <a href="<%= my_favorite_products_path %>"><i class="fa fa-th-large"></i> <span class="nav-label">Мои списки товаров</span></a>
+</li>
+
+<li class="divider"></li>
+<li class="<%= cp(orders_path) or cp(orders_path) %>">
+    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Заказы</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li class="<%= cp(products_path) %>"><a href="<%= orders_path %>">Заказы</a></li>
+        <li class="<%= cp(categories_path) %>"><a href="<%= orders_path %>">Накладные</a></li>
+    </ul>
+</li>

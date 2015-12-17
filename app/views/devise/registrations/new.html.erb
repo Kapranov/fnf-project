@@ -1,0 +1,61 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag "plugins/iCheck/custom" %>
+
+<%= stylesheet_link_tag "plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox" %>
+<% end %>
+
+<% content_for :js do %>
+<!-- iCheck -->
+<%= javascript_include_tag "plugins/iCheck/icheck.min" %>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+<% end %>
+<div class="middle-box text-center loginscreen">
+    <div>
+        <div>
+            <h1 class="logo-name">FNF</h1>
+        </div>
+        <h3>Зарегистрироваться в FNF</h3>
+        <p>Создайте аккаунт, чтобы увидеть его в действии.</p>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
+            <%#= f.error_notification %>
+            <%#= devise_error_messages! %>
+            <% if resource.errors.any? %>
+            <div id="error_explanation" class="text-left">
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <p><strong>Исправьте <%= resource.errors.count %> <%=  Russian.p(resource.errors.count, "ошыбка", "ошыбки", "ошыбки") %>.</strong></p>
+                    <ul class="list-unstyled">
+                        <% resource.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+            <% end %>
+            <div class="form-group">
+                <%= f.email_field :email, required: true, autofocus: true, class: 'form-control', placeholder: "Электронная почта" %>
+            </div>
+            <div class="form-group">
+                <%= f.password_field :password, class: 'form-control', placeholder: "Пароль", required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+            </div>
+            <div class="form-group">
+                <%= f.password_field :password_confirmation, required: true, class: 'form-control', placeholder: "Подтвердите пароль" %>
+            </div>
+            <div class="form-group">
+                     
+                    <label> <%= f.check_box :terms_of_service, class: "i-checks" %> Я согласен с условиями и политикой </label> 
+            </div>
+                <%= f.submit "Зарегистрироваться", class: "btn btn-primary block full-width m-b" %>
+            <p class="text-muted text-center"><small>Уже есть учетная запись?</small></p>
+            <%= link_to "Авторизоваться", session_path(resource_name), class: 'btn btn-sm btn-white btn-block' %>
+        <% end %>
+        <p class="m-t"> <small>&copy; FNF <%= Time.now.year %></small> </p>
+    </div>
+</div>

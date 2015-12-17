@@ -1,0 +1,247 @@
+# English translations for app package.
+# Copyright (C) 2015 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the app package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: app 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2015-09-07 15:24+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4"
+" && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"\n"
+
+msgid "About"
+msgstr ""
+
+msgid "Administration"
+msgstr ""
+
+msgid "Are you sure"
+msgstr ""
+
+msgid "Authorization"
+msgstr ""
+
+msgid "Avatar menu"
+msgstr "Personal informations"
+
+msgid "Back"
+msgstr ""
+
+msgid "Blog"
+msgstr ""
+
+msgid "Calendar"
+msgstr ""
+
+msgid "Catalog"
+msgstr ""
+
+msgid "Catalog of products"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "Category not found"
+msgstr "Category not found."
+
+msgid "Category was successfully created"
+msgstr "Category was successfully created."
+
+msgid "Category was successfully destroyed"
+msgstr "Category was successfully destroyed."
+
+msgid "Category was successfully updated"
+msgstr "Category was successfully updated."
+
+msgid "Change my password"
+msgstr ""
+
+msgid "Change your password"
+msgstr ""
+
+msgid "Companies"
+msgstr ""
+
+msgid "Confirm your new password"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Contacts"
+msgstr ""
+
+msgid "Create account to see it in action"
+msgstr "Create account to see it in action."
+
+msgid "Create an account"
+msgstr ""
+
+msgid "Currently waiting"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Dashboards"
+msgstr ""
+
+msgid "Do not have an account"
+msgstr "Do not have an account?"
+
+msgid "E-commerce"
+msgstr ""
+
+msgid "Edit profile"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Features"
+msgstr ""
+
+msgid "First Name"
+msgstr ""
+
+msgid "Forgot password"
+msgstr ""
+
+msgid "Forgot your password"
+msgstr ""
+
+msgid "Forum"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Inspinia Theme"
+msgstr "Zettheme Inc."
+
+msgid "Last Name"
+msgstr ""
+
+msgid "Learn more"
+msgstr "Learn More"
+
+msgid "Leave it blank"
+msgstr "Leave it blank."
+
+msgid "Login"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Lorem_Ipsum"
+msgstr "Lorem Ipsum is simply dummy text of the printing."
+
+msgid "Mailbox"
+msgstr ""
+
+msgid "Manage roles"
+msgstr "Manage Roles"
+
+msgid "Manage users"
+msgstr "Manage Users"
+
+msgid "Middle Name"
+msgstr ""
+
+msgid "New password"
+msgstr ""
+
+msgid "Note"
+msgstr ""
+
+msgid "Orders"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Password confirmation"
+msgstr ""
+
+msgid "Please login in"
+msgstr "Please login in."
+
+msgid "Pricing"
+msgstr ""
+
+msgid "Products"
+msgstr ""
+
+msgid "Profile"
+msgstr ""
+
+msgid "READ MORE"
+msgstr ""
+
+msgid "Register to fnf"
+msgstr ""
+
+msgid "Remove avatar"
+msgstr ""
+
+msgid "Search for something"
+msgstr "Search for something ..."
+
+msgid "Send me reset password instructions"
+msgstr "Send me reset password instructions."
+
+msgid "Sign up"
+msgstr ""
+
+msgid "Team"
+msgstr ""
+
+msgid "Testimonials"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Welcome to dashboard page"
+msgstr ""
+
+msgid "carusel_text_1"
+msgstr "We craft"
+
+msgid "carusel_text_2"
+msgstr "brands, web apps,"
+
+msgid "carusel_text_3"
+msgstr "and user interfaces"
+
+msgid "carusel_text_4"
+msgstr "we are IN+ studio"
+
+msgid "carusel_text_5"
+msgstr " "
+
+msgid "carusel_text_6"
+msgstr "We create meaningful"
+
+msgid "carusel_text_7"
+msgstr "interfaces that inspire."
+
+msgid "carusel_text_8"
+msgstr "Cras justo odio, dapibus ac facilisis in, egestas eget quam."
+
+msgid "we app framework"
+msgstr ""

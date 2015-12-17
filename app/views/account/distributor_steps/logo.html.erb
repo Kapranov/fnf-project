@@ -1,0 +1,19 @@
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div class="text-center">
+        <h3>Добавьте свою компанию</h3>
+        <p>О Вашей компании теперь узнают все.</p>
+    </div>
+    <%= form_for @company, method: :put, url: wizard_path, class: "m-t" do |f| %>
+        <% if f.object.errors.any? %>
+            <div class="error_messages">
+              <% f.object.errors.full_messages.each do |error| %>
+                <p><%= error %></p>
+              <% end %>
+            </div>
+        <% end %>
+        <div class="form-group">
+         <%= f.file_field :logo %>
+        </div>
+        <%= f.submit 'Следующий шаг', class: "btn btn-primary block full-width m-b" %>
+    <% end %>
+</div>

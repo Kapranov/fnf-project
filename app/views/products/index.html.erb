@@ -1,0 +1,129 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-12">
+        <h2>Каталог - товары - список товаров <%= link_to content_tag(:i, nil, class: "fa fa-plus") + " " + "Добавить товар", new_product_path, class: "btn-primary btn btn-xs pull-right" %></h2>
+        <ol class="breadcrumb">
+            <li><a href="<%= dashboard_path %>">Главная</a></li>
+            <li><a>Каталог</a></li>
+            <li><a href="<%= products_path %>">Товары</a></li>
+            <li class="active"><strong>Список товаров</strong></li>
+        </ol>
+    </div>
+     
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>Все товары в каталоге</h5>
+            <div class="ibox-tools">
+                <%= link_to content_tag(:i, nil, class: "fa fa-plus") + " " + "Добавить новый товар", new_product_path, class: "btn-primary btn btn-xs" %>
+            </div>
+        </div>
+        <%#= search_form_for @q, url: search_products_path, html: { method: :post }  do |f| %>
+        <div class="ibox-content m-b-sm border-bottom">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label" for="product_name">Название товара</label>
+                        <input type="text" id="product_name" name="product_name" value="" placeholder="Название товара" class="form-control">
+                        <%#= f.text_field :name_eq, placeholder: "Название товара", class: "form-control" %>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label" for="price">Категория</label>
+                        <input type="text" id="price" name="price" value="" placeholder="Категория" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label" for="quantity">Компания</label>
+                        <input type="text" id="quantity" name="quantity" value="" placeholder="Компания" class="form-control">
+                    </div>
+                </div>
+                 <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label" for="quantity">Торговая марка</label>
+                        <input type="text" id="quantity" name="quantity" value="" placeholder="Торговая марка" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label" for="status">Статус</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="1" selected="">Активный
+                            <option value="0">Неактивный
+                        </select>
+                    </div>
+                </div>
+                <%#= submit_tag "Search" %>
+                <%#= submit_tag, class: 'btn btn btn-primary', :name => nil  do  %>
+                <%#= content_tag(:i, nil, class: "fa fa fa-search") + ' ' + "Поиск" %>
+                <%# end %>
+            </div>
+        </div>
+        <%# end %>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Изобр.</th>
+                                    <th data-toggle="true">Название</th>
+                                    <th data-hide="phone">Артикул</th>
+                                    <th>Категория</th>
+                                    <th data-hide="phone">Компания</th>
+                                    <th data-hide="phone">Торговая марка</th>
+                                    <th class="text-right" data-sort-ignore="true">Действие</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @products.each do |product| %>
+                                <tr>
+                                    <% if product.status == "published" %> 
+                                    <td><span class="small" data-toggle="tooltip" data-placement="top" title="<%= t(product.status, :scope => 'product_status') %>"><i class="fa fa fa-circle text-navy"> </i></span></td>
+                                    <% else %>
+                                    <td><span class="small" data-toggle="tooltip" data-placement="top" title="<%= t(product.status, :scope => 'product_status') %>"><i class="fa fa fa-circle text-danger"> </i></span></td>
+                                    <% end %>
+                                    <td>
+                                        <% product.product_images.first(1).each do |i| %>
+                                          <%= image_tag i.image_url(:product_thumb) %>
+                                        <% end %> 
+                                    </td>
+                                    <td><%= link_to product.name, product_path(product) %></td>
+                                    <td><%= product.reference %></td>
+                                    <td><%= link_to product.category.name, category_path(product.category), data: { toggle: "tooltip", placement: "top" }, title: "Перейти в категорию #{product.category.name}" %></td>
+                                    <td><%= link_to product.company.name, company_path(product.company), data: { toggle: "tooltip", placement: "top" }, title: "Перейти на карточку компании #{product.company.name}" if product.company %></td>
+                                    <td><%= link_to product.trademark.name, trademark_path(product.trademark), data: { toggle: "tooltip", placement: "top" }, title: "Перейти на карточку торговой марки #{product.trademark.name}" %></td>
+                                    <td class="text-right">
+                                        <div class="btn-group-action">
+                                            <div class="btn-group pull-right">
+                                                <%= link_to content_tag(:i, nil, class: "fa fa-eye") + " " + "Просмотр", product_path(product), class: "btn-white btn btn-xs" %>
+                                                <button data-toggle="dropdown" class="btn btn-white btn-xs dropdown-toggle" type="button"><span class="caret"></span></button>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li><%= link_to content_tag(:i, nil, class: "fa fa-pencil") + " " + "Править", edit_product_path(product) %></li>
+                                                    <li class="divider"></li>
+                                                    <li><%= link_to content_tag(:i, nil, class: "fa fa-trash") + " " + 'Удалить', product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6">
+                                        <ul class="pagination pull-right"><%= will_paginate @products %></ul>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

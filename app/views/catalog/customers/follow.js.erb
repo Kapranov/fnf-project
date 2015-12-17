@@ -1,0 +1,7 @@
+<% if current_user.follows?(@customer) %>
+  $('#follow_button').html('<%= escape_javascript(render "unfollow") %>');
+<% else %>
+  $('#follow_button').html('<%= escape_javascript(render "follow") %>');
+<% end %>
+
+$("#followers").html( "<%= @customer.followers(User).count %>" );

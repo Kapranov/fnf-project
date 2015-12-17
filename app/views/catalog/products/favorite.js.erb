@@ -1,0 +1,5 @@
+<% if current_user.mentions?(@product) %>
+  $('#favorite_button').html('<%= escape_javascript(render "unfavorite") %>');
+<% else %>
+  $('#favorite_button').html('<%= escape_javascript(render "favorite") %>');
+<% end %>

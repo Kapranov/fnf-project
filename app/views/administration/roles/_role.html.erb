@@ -1,0 +1,164 @@
+<% t_scope = [ :the_role_gui, :roles, :role ] %>
+<% content_for :role_update_btn_set do %>
+  <div class="btn-group">
+    <a class="btn btn-warning">
+      <i class="icon-repeat glyphicon glyphicon-repeat"></i>
+    </a>
+    <a class="btn btn-success">
+      <i class="icon-ok glyphicon glyphicon-ok"></i>
+    </a>
+  </div>
+<% end %>
+<% content_for :role_main do %>
+  <% hidden = 'visibility:hidden' %>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Role Info (edit in place)
+      <%= link_to t(:role_export, scope: t_scope), role_export_administration_admin_role_path(role), class: "btn btn-xs btn-warning pull-right" %>
+    </div>
+    <div class="panel-body">
+      <%= form_for(role, url: change_administration_admin_role_path(role), html: { class: "form-inline" } ) do |f| %>
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="holder" style="margin: 3px">
+              <%= t(:role_name, scope: t_scope) + ':' %>
+              <span class="a">
+                <%= role.name %>
+              </span>
+              <span class="b" style="<%= hidden %>">
+                <div class="form-group">
+                  <%= f.text_field :name, class: "form-control" %>
+                </div>
+                <%= yield(:role_update_btn_set) %>
+              </span>
+            </h3>
+            <h5 class="holder" style="margin: 3px">
+              <%= t(:title, scope: t_scope) + ':' %>
+              <span class="a">
+                <%= role.title %>
+              </span>
+              <span class="b" style="<%= hidden %>">
+                <div class="form-group">
+                  <%= f.text_field :title, class: "form-control" %>
+                </div>
+                <%= yield(:role_update_btn_set) %>
+              </span>
+            </h5>
+            <h5 class="holder" style="margin: 3px">
+              <%= t(:role_description, scope: t_scope) + ':' %>
+              <span class="a">
+                <%= role.description %>
+              </span>
+              <span class="b" style="<%= hidden %>">
+                <div class="form-group">
+                  <%= f.text_field :description, class: "form-control" %>
+                </div>
+                <%= yield(:role_update_btn_set) %>
+              </span>
+            </h5>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Role rules</div>
+    <div class="panel-body">
+      <% role.to_hash.each_pair do |section, rules| %>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-md-9">
+                <h5>
+                  <%= section %>
+                </h5>
+              </div>
+              <div class="col-md-3">
+                <div class="delete">
+                  <div class="btn-group">
+                    <%= button_to t(:delete_section, scope: t_scope), administration_role_section_path(role, section), method: :delete, class: 'btn btn-danger', data: { confirm: t(:section_delete_confirm, scope: t_scope) } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="rules">
+              <% rules.each_pair do |rule, value| %>
+                <div class="row">
+                  <div class="col-md-9">
+                    <h4>
+                      &rarr;
+                      <%= rule %>
+                    </h4>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="controls">
+                      <div class="btn-group">
+                        <% klass = value ? :success : :info %>
+                        <% state = value ? t(:enable, scope: t_scope) : t(:disable, scope: t_scope) %>
+                        <button class="btn btn-<%= klass %>">
+                          <%= state %>
+                        </button>
+                        <button class="btn btn-<%= klass %> dropdown-toggle" data-toggle="<%= :dropdown %>">
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li class="success">
+                            <%= link_to t(:enable, scope: t_scope),  rule_on_administration_role_section_path(role, section, :name => rule), :method => :put %>
+                          </li>
+                          <li class="info">
+                            <%= link_to t(:disable, scope: t_scope), rule_off_administration_role_section_path(role, section, :name => rule), :method => :put %>
+                          </li>
+                          <li class="divider"></li>
+                          <li class="error">
+                            <%= link_to t(:delete_rule, scope: t_scope), destroy_rule_administration_role_section_path(role, section, :name => rule), method: :delete, data: { confirm: t(:rule_delete_confirm, scope: t_scope) } %>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <%= t(:create_section, scope: t_scope) %>
+    </div>
+    <div class="panel-body">
+      <%= form_tag administration_admin_role_sections_path(role), class: "form-inline" do |f| %>
+        <div class="form-group">
+          <%= text_field_tag :section_name, '', class: "form-control", placeholder: t(:new_section_placeholder, scope: t_scope) %>
+        </div>
+        <%= submit_tag t(:create_section, scope: t_scope), class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <%= t(:create_rule, scope: t_scope) %>
+    </div>
+    <div class="panel-body">
+      <%= form_tag create_rule_administration_admin_role_sections_path(role), role: :form, class: "form-inline" do |f| %>
+        <div class="form-group">
+          <select class="form-control" name="<%= :section_name %>">
+            <% role.to_hash.each_pair do |section, rules| %>
+              <option value="<%= section %>">
+                <%= section %>
+              </option>
+            <% end %>
+          </select>
+        </div>
+        <div class="form-group">
+          <%= text_field_tag :rule_name, '', class: "form-control", placeholder: t(:new_rule_placeholder, scope: t_scope) %>
+        </div>
+        <%= submit_tag t(:create_rule, scope: t_scope), class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

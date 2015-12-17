@@ -1,0 +1,47 @@
+<% content_for :js do %>
+<!-- Jquery Validate -->
+<%= javascript_include_tag "plugins/validate/jquery.validate.min" %>
+    <script>
+        $(document).ready(function () {
+            $(".edit_user").validate({
+                rules: {
+                    'user[first_name]': {
+                        required: true
+                    },
+                   'user[last_name]': {
+                        required: true
+                    }
+                },
+                messages: {
+                    'user[first_name]': {
+                        required: "Введите Ваше имья",
+                    },
+                    'user[last_name]': {
+                        required: "Введите Вашу фамилию.",
+                    }
+                }
+            });
+        });
+    </script>
+<% end %>
+
+<div class="middle-box text-center loginscreen   animated fadeInDown">
+    <h3>Как Вас зовут</h3>
+    <p>С Вами с могут общаться другие пользователи сети.</p>
+    <%= form_for @user, method: :put, url: wizard_path, class: "m-t" do |f| %>
+        <% if f.object.errors.any? %>
+            <div class="error_messages">
+              <% f.object.errors.full_messages.each do |error| %>
+                <p><%= error %></p>
+              <% end %>
+            </div>
+        <% end %>
+        <div class="form-group">
+          <%= f.text_field :first_name, placeholder: "Имя", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :last_name, placeholder: "Фамилия", class: "form-control" %>
+        </div>
+        <%= f.submit 'Следующий шаг', class: "btn btn-primary block full-width m-b" %>
+    <% end %>
+</div>

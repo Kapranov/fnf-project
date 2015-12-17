@@ -1,0 +1,61 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Активность сотрудников</h2>
+        <ol class="breadcrumb">
+            <li><a href="<%= dashboard_path %>">Главная</a></li>
+            <li><a>Статистика</a></li>
+            <li class="active"><strong>Активность сотрудников</strong></li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <span class="text-muted small pull-right">Текущее время: <i class="fa fa-clock-o"></i> <%= localize Time.now, :format => '%T, %A %d %B' %></span>
+                    <h2>Активность сотрудников</h2>
+                    <p>All clients need to be verified before you can send email and set a project.</p>
+                    <div class="input-group">
+                        <input type="text" placeholder="Поиск сотрудника" class="input form-control">
+                        <span class="input-group-btn">
+                                <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Поиск</button>
+                        </span>
+                    </div>
+                    <div class="clients-list">
+                        <div class="full-height-scroll">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <tbody>
+                                    <% @activities.each do |activity| %>
+                                    <tr>
+                                        <td class="client-avatar"> <%= image_tag activity.owner.avatar.url(:thumb), class: "img-circle", style: "width: 52px; height: 52px;" if activity.owner  %></td>
+                                        <td><%= activity.owner.last_name + ' ' + activity.owner.first_name if activity.owner %></td>
+                                        <td class="contact-type"><i class="fa fa-edit"> </i></td>
+                                        <td> <%= render_activity activity %></td>
+                                        <td class="contact-type"><i class="fa fa-clock-o"> </i></td>
+                                        <td><%= time_ago_in_words(activity.created_at) %> <%= 'назад' %></td>
+                                        <td class="contact-type"><i class="fa fa-key"> </i></td>
+                                        <td> <%= sanitize(t(activity.owner.role_name, :scope => '.role_name').truncate(21)) if activity.owner %></td>
+                                        <td class="client-status"><span class="label label-primary"><%= activity.owner.status if activity.owner %></span></td>
+                                    </tr>
+                                    <% end %>
+                                    </tbody>
+                                    <tfoot>
+			                            <tr>
+			                                <td colspan="6">
+			                                    <ul class="pagination pull-right"><%= will_paginate @products %></ul>
+			                                </td>
+			                            </tr>
+			                        </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+    </div>
+</div>           

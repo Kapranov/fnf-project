@@ -1,0 +1,32 @@
+<% t_scope = [ :the_role_gui, :roles, :sidebar ] %>
+ 
+  <div class="panel panel-primary">
+    <div class="panel-heading">Role Nav</div>
+    <div class="panel-body">
+      <h4>
+        <%= link_to raw('&larr; Home'), root_path %>
+      </h4>
+    </div>
+  </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <%= t '.roles_list' %>
+    </div>
+    <div class="panel-body">
+      <% (@roles || Role.all).each do |role| %>
+        <p>
+          <%= link_to role.title, edit_administration_role_url(role) %>
+          (<%= role.users.count %>)
+          <%= link_to administration_role_url(role), method: :delete, title: role.title, data: { confirm: t(:delete_role_confirm, scope: t_scope) }, class: :delete do %>
+            <i class="fa fa-remove"></i>
+          <% end %>
+        </p>
+      <% end %>
+      <hr/>
+      <p class="new">
+        <%= link_to t(:new_role, scope: t_scope), new_administration_role_path, class: 'btn btn-xs btn-success' %>
+      </p>
+      <hr/>
+    </div>
+  </div>
+ 

@@ -1,0 +1,247 @@
+# Ukrainian translations for app package.
+# Copyright (C) 2015 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the app package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: app 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2015-09-07 15:23+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Ukrainian\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4"
+" && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"\n"
+
+msgid "About"
+msgstr "Про мене"
+
+msgid "Administration"
+msgstr "Адміністрування"
+
+msgid "Are you sure"
+msgstr "Ви впевнені?"
+
+msgid "Authorization"
+msgstr "Авторизація"
+
+msgid "Avatar menu"
+msgstr "Персональна інформація"
+
+msgid "Back"
+msgstr "Повернутися"
+
+msgid "Blog"
+msgstr "Блог"
+
+msgid "Calendar"
+msgstr "Календар"
+
+msgid "Catalog"
+msgstr "Каталог"
+
+msgid "Catalog of products"
+msgstr "Каталог продукції"
+
+msgid "Categories"
+msgstr "Категорії"
+
+msgid "Category not found"
+msgstr "Категорія не знайдена"
+
+msgid "Category was successfully created"
+msgstr "Категорія успішно створена."
+
+msgid "Category was successfully destroyed"
+msgstr "Категорія успішно знищені."
+
+msgid "Category was successfully updated"
+msgstr "Категорія була успішно оновлено."
+
+msgid "Change my password"
+msgstr "Забули пароль?"
+
+msgid "Change your password"
+msgstr "Забули ваш пароль?"
+
+msgid "Companies"
+msgstr "Компанії"
+
+msgid "Confirm your new password"
+msgstr "Підтвердіть новий пароль"
+
+msgid "Contact"
+msgstr "Контакт"
+
+msgid "Contacts"
+msgstr "Контакти"
+
+msgid "Create account to see it in action"
+msgstr "Створити аккаунт, щоб побачити його в дії ."
+
+msgid "Create an account"
+msgstr "Створити аккаунт"
+
+msgid "Currently waiting"
+msgstr "В даний час чекає підтвердження для: "
+
+msgid "Dashboard"
+msgstr "Панель"
+
+msgid "Dashboards"
+msgstr "Панелі"
+
+msgid "Do not have an account"
+msgstr "Немае аккаунта?"
+
+msgid "E-commerce"
+msgstr "Інтернет магазин"
+
+msgid "Edit profile"
+msgstr "Редагувати"
+
+msgid "Email"
+msgstr "Поштова скринька"
+
+msgid "Features"
+msgstr "Особливості"
+
+msgid "First Name"
+msgstr "Ім'я"
+
+msgid "Forgot password"
+msgstr "Забули пароль?"
+
+msgid "Forgot your password"
+msgstr "Забули ваш пароль?"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Home"
+msgstr "Головна"
+
+msgid "Inspinia Theme"
+msgstr "Zettheme Inc."
+
+msgid "Last Name"
+msgstr "Прізвище"
+
+msgid "Learn more"
+msgstr "Дізнатися більше"
+
+msgid "Leave it blank"
+msgstr "Залиште це поле порожнім , якщо ви не хочете, щоб змінити його"
+
+msgid "Login"
+msgstr "Ввійти"
+
+msgid "Logout"
+msgstr "Вийти"
+
+msgid "Lorem_Ipsum"
+msgstr "Простий манекен тексту друку стилю Лорем Іпсам"
+
+msgid "Mailbox"
+msgstr "Поштова скринька"
+
+msgid "Manage roles"
+msgstr "Управління ролями"
+
+msgid "Manage users"
+msgstr "Управління користувачами"
+
+msgid "Middle Name"
+msgstr "По батькові"
+
+msgid "New password"
+msgstr "Новий пароль!"
+
+msgid "Note"
+msgstr "Примітка"
+
+msgid "Orders"
+msgstr "Замовлення"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Password confirmation"
+msgstr "Підтвердження пароля"
+
+msgid "Please login in"
+msgstr "Будь ласка, увійдіть в ."
+
+msgid "Pricing"
+msgstr "Ціноутворення"
+
+msgid "Products"
+msgstr "Товари"
+
+msgid "Profile"
+msgstr "Профіль"
+
+msgid "READ MORE"
+msgstr "ЧИТАТИ ДАЛІ"
+
+msgid "Register to fnf"
+msgstr "Зареєструйся, на FnF"
+
+msgid "Remove avatar"
+msgstr "Видалити аватар"
+
+msgid "Search for something"
+msgstr "Пошук чогось ... "
+
+msgid "Send me reset password instructions"
+msgstr "Відправити мені інструкції"
+
+msgid "Sign up"
+msgstr "Зареєструватися"
+
+msgid "Team"
+msgstr "Команда"
+
+msgid "Testimonials"
+msgstr "Відгуки"
+
+msgid "Update"
+msgstr "Оновлення"
+
+msgid "Username"
+msgstr "Ваш Логін"
+
+msgid "Welcome to dashboard page"
+msgstr "Ласкаво просимо "
+
+msgid "carusel_text_1"
+msgstr "Ми розробляємо"
+
+msgid "carusel_text_2"
+msgstr "веб -додатки та"
+
+msgid "carusel_text_3"
+msgstr "інтерфейси,"
+
+msgid "carusel_text_4"
+msgstr "ми веб студія"
+
+msgid "carusel_text_5"
+msgstr " "
+
+msgid "carusel_text_6"
+msgstr "Ми створюємо сенс"
+
+msgid "carusel_text_7"
+msgstr "інтерфейси, які надихають ."
+
+msgid "carusel_text_8"
+msgstr "Життя - гра , перше правило якої - вважати, що це зовсім не гра , а серйозно ."
+
+msgid "we app framework"
+msgstr "веб розробка"

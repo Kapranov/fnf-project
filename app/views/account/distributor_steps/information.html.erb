@@ -1,0 +1,99 @@
+ 
+<% content_for :css do %>
+<%= stylesheet_link_tag "plugins/iCheck/custom.css" %>
+
+<%= stylesheet_link_tag "plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote.css" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote-bs3.css" %>
+<% end %>
+
+<% content_for :js do %>
+<!-- Jquery Validate -->
+<%= javascript_include_tag "plugins/validate/jquery.validate.min" %>
+
+<!-- iCheck -->
+<%= javascript_include_tag "plugins/iCheck/icheck.min" %>
+<!-- SUMMERNOTE -->
+<%= javascript_include_tag "plugins/summernote/summernote.min" %>
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+              height: 150   //set editable area's height
+            });
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            $("#new_company").validate({
+                rules: {
+                    'company[name]': {
+                        required: true,
+                        minlength: 5,
+                        maxlength: 60
+                    },
+                   'company[description]': {
+                        required: true,
+                        minlength: 200,
+                        maxlength: 2000
+                    },
+                    'company[business_entity]': {
+                        required: true
+                    },
+                    'company[vatcode]': {
+                        required: true
+                    },
+                    'company[company_id_number]': {
+                        required: true
+                    },
+                    'company[cea]': {
+                        required: true
+                    },
+                    'company[registration_date]': {
+                        required: true
+                    }
+                },
+                messages: {
+                    'company[name]': {
+                        required: "Введите название компании",
+                        minlength: "Название компании должно состоять из не менее 5 знаков." 
+                    },
+                    'company[description]': {
+                        required: "Введите описание компании.",
+                        minlength: "Описание компании должно состоять не менее чем из 200 знаков.",
+                        maxlength: "Описание компании должно состоять не более чем 2000 знаков."
+                    }
+                }
+            });
+        });
+    </script>
+<% end %>
+<div class="middle-box manufacturer_steps_screen animated fadeInDown">
+    <div class="text-center">
+        <h3>Добавьте свою компанию</h3>
+        <p>О Вашей компании теперь узнают все.</p>
+    </div>
+    <%= form_for @company, method: :put, url: wizard_path, class: "m-t" do |f| %>
+        <% if f.object.errors.any? %>
+            <div class="error_messages">
+              <% f.object.errors.full_messages.each do |error| %>
+                <p><%= error %></p>
+              <% end %>
+            </div>
+        <% end %>
+        <div class="form-group">
+            <%= f.text_field :name, placeholder: "Название компании", class: "form-control" %>
+            <span class="help-block m-b-none">Общеизвестное название для этой компании. Недопустимые символы <>;=#{}</span>
+        </div>
+        <div class="form-group">
+            <%= f.text_area :description, placeholder: "Название компании", style: "width: 100%; height: 100%;", class: "summernote" %>
+            <span class="help-block m-b-none">Описание появляется в середине страницы компании.</span>
+        </div>
+        <%= f.submit 'Следующий шаг', class: "btn btn-primary text-right m-b" %>
+    <% end %>
+</div>

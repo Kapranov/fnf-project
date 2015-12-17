@@ -1,0 +1,247 @@
+# Russian translations for app package.
+# Copyright (C) 2015 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the app package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: app 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2015-09-07 15:24+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4"
+" && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"\n"
+
+msgid "About"
+msgstr "Обо мне"
+
+msgid "Administration"
+msgstr "Администрирование"
+
+msgid "Are you sure"
+msgstr "Вы уверены?"
+
+msgid "Authorization"
+msgstr "Авторизация"
+
+msgid "Avatar menu"
+msgstr "Персональная информация"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Blog"
+msgstr "Блог"
+
+msgid "Calendar"
+msgstr "Календарь"
+
+msgid "Catalog"
+msgstr "Каталог"
+
+msgid "Catalog of products"
+msgstr "Каталог продукции"
+
+msgid "Categories"
+msgstr "Категории"
+
+msgid "Category not found"
+msgstr "Категория не найдена"
+
+msgid "Category was successfully created"
+msgstr "Категория успешно создана."
+
+msgid "Category was successfully destroyed"
+msgstr "Категория успешно уничтожены."
+
+msgid "Category was successfully updated"
+msgstr "Категория была успешно обновлена."
+
+msgid "Change my password"
+msgstr "Забыли пароль?"
+
+msgid "Change your password"
+msgstr "Забыли ваш пароль?"
+
+msgid "Companies"
+msgstr "Компании"
+
+msgid "Confirm your new password"
+msgstr "Подтвердите новый пароль"
+
+msgid "Contact"
+msgstr "Контакт"
+
+msgid "Contacts"
+msgstr "Контакты"
+
+msgid "Create account to see it in action"
+msgstr "Создать аккаунт, чтобы увидеть его в действии ."
+
+msgid "Create an account"
+msgstr "Создать аккаунт"
+
+msgid "Currently waiting"
+msgstr "В настоящее время ждет подтверждение для: "
+
+msgid "Dashboard"
+msgstr "Панель"
+
+msgid "Dashboards"
+msgstr "Панели"
+
+msgid "Do not have an account"
+msgstr "Нет аккаунта?"
+
+msgid "E-commerce"
+msgstr "Интернет-магазин"
+
+msgid "Edit profile"
+msgstr "Редактировать"
+
+msgid "Email"
+msgstr "Почтовый ящик"
+
+msgid "Features"
+msgstr "Особенности"
+
+msgid "First Name"
+msgstr "Имя"
+
+msgid "Forgot password"
+msgstr "Забыли пароль?"
+
+msgid "Forgot your password"
+msgstr "Забыли ваш пароль?"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Home"
+msgstr "Главная"
+
+msgid "Inspinia Theme"
+msgstr "Zettheme Inc."
+
+msgid "Last Name"
+msgstr "Фамилия"
+
+msgid "Learn more"
+msgstr "Узнать больше"
+
+msgid "Leave it blank"
+msgstr "Оставьте это поле пустым , если вы не хотите , изменять его"
+
+msgid "Login"
+msgstr "Войти"
+
+msgid "Logout"
+msgstr "Выйти"
+
+msgid "Lorem_Ipsum"
+msgstr "Простой манекен текста печати стиля Лорем Ипсам"
+
+msgid "Mailbox"
+msgstr "Почтовый ящик"
+
+msgid "Manage roles"
+msgstr "Управление ролями"
+
+msgid "Manage users"
+msgstr "Управление пользователями"
+
+msgid "Middle Name"
+msgstr "Отчество"
+
+msgid "New password"
+msgstr "Новый пароль!"
+
+msgid "Note"
+msgstr "Заметка"
+
+msgid "Orders"
+msgstr "Заказы"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Password confirmation"
+msgstr "Подтверждение пароля"
+
+msgid "Please login in"
+msgstr "Пожалуйста, войдите в ."
+
+msgid "Pricing"
+msgstr "Ценообразование"
+
+msgid "Products"
+msgstr "Товары"
+
+msgid "Profile"
+msgstr "Профиль"
+
+msgid "READ MORE"
+msgstr "ЧИТАТЬ ДАЛЕЕ"
+
+msgid "Register to fnf"
+msgstr "Зарегистрируйся на FnF"
+
+msgid "Remove avatar"
+msgstr "Удалить аватар"
+
+msgid "Search for something"
+msgstr "Поиск чего-то ... "
+
+msgid "Send me reset password instructions"
+msgstr "Отправить мне инструкции"
+
+msgid "Sign up"
+msgstr "Регистрация"
+
+msgid "Team"
+msgstr "Команда"
+
+msgid "Testimonials"
+msgstr "Отзывы"
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "Username"
+msgstr "Ваш логин"
+
+msgid "Welcome to dashboard page"
+msgstr "Добро пожаловать г-н "
+
+msgid "carusel_text_1"
+msgstr "Мы разрабатываем"
+
+msgid "carusel_text_2"
+msgstr "веб-приложения и"
+
+msgid "carusel_text_3"
+msgstr "пользовательские"
+
+msgid "carusel_text_4"
+msgstr "интерфейсы,"
+
+msgid "carusel_text_5"
+msgstr "мы веб студия"
+
+msgid "carusel_text_6"
+msgstr "Мы создаем смысл"
+
+msgid "carusel_text_7"
+msgstr "интерфейсы , которые вдохновляют ."
+
+msgid "carusel_text_8"
+msgstr "Жизнь - игра, первое правило которой - считать, что это вовсе не игра ."
+
+msgid "we app framework"
+msgstr "веб разработка"

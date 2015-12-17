@@ -1,0 +1,476 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag "plugins/iCheck/custom.css" %>
+
+<%= stylesheet_link_tag "plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote.css" %>
+<%= stylesheet_link_tag "plugins/summernote/summernote-bs3.css" %>
+<% end %>
+
+<% content_for :js do %>
+<!-- Jquery Validate -->
+<%= javascript_include_tag "plugins/validate/jquery.validate.min" %>
+
+<!-- iCheck -->
+<%= javascript_include_tag "plugins/iCheck/icheck.min" %>
+<!-- SUMMERNOTE -->
+<%= javascript_include_tag "plugins/summernote/summernote.min" %>
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+              height: 150   //set editable area's height
+            });
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            $("#new_product").validate({
+                rules: {
+                    'product[name]': {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 60
+                    },
+                   'product[ean13]': {
+                        required: true,
+                        number: true,
+                        minlength: 10
+                    },
+                    number: {
+                        required: true,
+                        number: true
+                    },
+                    min: {
+                        required: true,
+                        minlength: 6
+                    },
+                    max: {
+                        required: true,
+                        maxlength: 4
+                    }
+                },
+                messages: {
+                    'product[name]': {
+                        required: "Введите название товара",
+                        minlength: "Название товара должно состоять из не менее 10 символов" 
+                    },
+                    'product[ean13]': {
+                        required: "Введите штрих-код",
+                        minlength: "Штрих код должен состоять не менее из 10 цыфер",
+                        number:    "Штрих код должен состоять из цыфер"
+                    }
+                }
+            });
+        });
+    </script>
+<% end %>
+
+<%= form_for([:administration, @product], :html => { :multipart => true }) do |f| %>
+<% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+        <ul>
+        <% @product.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+        </ul>
+    </div>
+<% end %>
+<div class="wrapper wrapper-content ecommerce">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>Редактирование товара</h5>
+            <div class="ibox-tools">
+                <%#= link_to content_tag(:i, nil, class: "fa fa-plus") + " " + "Добавить новый товар", new_administration_product_path, class: "btn-primary btn btn-xs" %>
+            </div>
+        </div>
+        <div class="ibox-content m-b-sm border-bottom">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="tabs-container">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab-information">Информация</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-prices">Цены</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-seo">СЕО</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-images">Изображения</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-specifications">Характеристики</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-attachments">Вложения</a></li>
+                            </ul>
+                            
+                            <div class="tab-content">
+                                <div id="tab-information" class="tab-pane active">
+                                    <div class="panel-body">
+                                        <fieldset class="form-horizontal">
+                                            <div class="form-group">
+                                            <label class="col-sm-2 control-label">Имя:</label>
+                                                <div class="col-sm-10">
+                                                    <%= f.text_field :name, maxlength: 60, placeholder: "Имя товара", class: "form-control" %>
+                                                     
+                                                    <span class="help-block m-b-none">Общеизвестное название для этого товара. Недопустимые символы <>;=#{}</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                            <label class="col-sm-2 control-label">Артикул:</label>
+                                                <div class="col-sm-10">
+                                                    <%= f.text_field :reference, placeholder: "Артикул", class: "form-control" %>
+                                                     
+                                                    <span class="help-block m-b-none">Внутренний артикул для этого товара. Разрешены специальные символы .-_#\</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                            <label class="col-sm-2 control-label">EAN-13 или JAN штрих-код:</label>
+                                                <div class="col-sm-10">
+                                                <%= f.text_field :ean13, placeholder: "штрих-код", class: "form-control" %>
+                                                 
+                                                <span class="help-block m-b-none">Это тип кода товара специфичен для Европы и Японии, но широко используется и во всём мире. Это расширение кода UPC: все товары, отмеченные EAN будут распознаны и в США.</span></div>
+                                            </div>
+                                             
+                                            <div class="form-group">
+                                            <label class="col-sm-2 control-label">Описание:</label>
+                                                <div class="col-sm-10">
+                                                    <%= f.text_area :description, style: "width: 100%; height: 100%;", class: "summernote" %>
+                                                    <span class="help-block m-b-none">Описание появляется в середине страницы товара.</span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                    </div>
+                                </div>
+                                
+                                <div id="tab-prices" class="tab-pane">
+                                    <div class="panel-body">
+                                        <fieldset class="form-horizontal"> 
+                                         
+                                            <div class="form-group">
+                                            <label class="col-sm-2 control-label">Розничная цена без НДС:</label>
+                                                <div class="col-sm-10">
+                                                    <%= f.text_field :price, placeholder: "Розничная цена без НДС", class: "form-control" %>
+                                                     
+                                                    <span class="help-block m-b-none">Розничная цена без НДС, по которой вы собираетесь продавать этот товар клиентам. Она должна быть выше закупочной и оптовой цены: разница между закупочной и розничной - это ваша маржа.</span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div id="tab-seo" class="tab-pane">
+                                    <div class="panel-body">
+                                        <fieldset class="form-horizontal"> 
+                                            <div class="form-group">
+                                            <label class="col-sm-2 control-label">Мета заголовок:</label>
+                                                <div class="col-sm-10">
+                                                    <%= f.text_field :meta_title, placeholder: "Мета заголовок", class: "form-control" %>
+                                                     
+                                                    <span class="help-block m-b-none">Публичное название для страницы товара, и для поисковых систем. Оставьте пустым, чтобы использовать название товара. Количество оставшихся символов отображается в левой области.</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Мета описание:</label>
+                                                <div class="col-sm-10">
+                                                    <%= f.text_field :meta_description, placeholder: "Мета описание", class: "form-control" %>
+                                                     
+                                                    <span class="help-block m-b-none">Это описание появится в поисковых системах. Вам нужна простая фраза, короче 160 символов (включая пробелы).</span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div id="tab-images" class="tab-pane">
+                                    <div class="panel-body">
+                                        <%= f.fields_for :product_images do |i| %>
+                                        <%= i.label :image %><br>
+                                        <%= i.file_field :image, :multiple => true, name: "product_images[image][]" %>
+                                         <%= link_to "Edit Attachment", edit_product_image_path(i) %>
+                                        <% end %>
+                                        <% if !@product.new_record? %>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-stripped">
+                                                <thead>
+                                                <tr>
+                                                    <th>Image preview</th>
+                                                    <th>Image url</th>
+                                                    <th>Sort order</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% @product_images.each do |i| %>
+                                                <tr>
+                                                    <td><%= image_tag i.image_url(:product_thumb) %></td>
+                                                    <td><%#= i.thumb.url %></td>
+                                                    <td><%#= i.current_path %></td>
+                                                    <td><%#= link_to content_tag(:i, nil, class: "fa fa-trash") + " " + 'Удалить', product_image_path(i), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <% end %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <% end %>                        
+                                    </div>
+                                </div>
+                                <div id="tab-specifications" class="tab-pane">
+                                    <div class="panel-body">
+
+                                        <div class="table-responsive">
+                                            <!-- <table class="table table-bordered table-stripped">
+                                                <thead>
+                                                <tr>
+                                                    <th>Image preview</th>
+                                                    <th>Image url</th>
+                                                    <th>Sort order</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\2s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image1.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="1">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\1s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image2.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="2">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\3s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image3.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="3">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\4s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image4.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="4">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\5s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image5.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="5">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\6s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image6.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="6">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\7s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image7.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="7">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table> -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="tab-attachments" class="tab-pane">
+                                    <div class="panel-body">
+
+                                        <div class="table-responsive">
+                                            <!-- <table class="table table-bordered table-stripped">
+                                                <thead>
+                                                <tr>
+                                                    <th>
+                                                        Image preview
+                                                    </th>
+                                                    <th>
+                                                        Image url
+                                                    </th>
+                                                    <th>
+                                                        Sort order
+                                                    </th>
+                                                    <th>
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\2s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image1.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="1">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\1s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image2.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="2">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\3s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image3.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="3">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\4s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image4.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="4">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\5s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image5.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="5">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\6s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image6.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="6">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="img\gallery\7s.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" disabled="" value="http://mydomain.com/images/image7.png">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="7">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table> -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-sm-offset-2">
+                                <%= link_to "Отменить", administration_products_path, class: "btn btn-default" %>
+                            </div>
+                            <div class="col-sm-4 pull-right">
+                                <%= f.submit "Сохранить", class: "btn btn-primary" %>
+                                <%= f.submit "Сохранить и остаться", name: "stay", class: "btn btn-primary" %>
+                            </div>
+                            <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

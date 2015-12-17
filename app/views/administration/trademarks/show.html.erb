@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @trademark.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @trademark.description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @trademark.user %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @trademark.company %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @trademark.company %>
+</p>
+
+<%= link_to 'Edit', edit_administration_trademark_path(@trademark) %> |
+<%= link_to 'Back', administration_trademarks_path %>

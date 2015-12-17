@@ -1,0 +1,46 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header text-center">
+                <div class="dropdown profile-element"> 
+                    <span>
+                        <%= image_tag current_user.avatar.url(:thumb), class: "img-circle", style: "width: 50px; height: 50px;" , alt: current_user.first_name %>
+                    </span>
+                    <a class=" " href="<%= profile_path %>">
+                        <span class="clear"> 
+                            <span class="block m-t-xs">
+                                <strong class="font-bold"><%= full_name_user(current_user) %></strong>
+                            </span>
+                            <span class="text-muted text-xs block"><%= sanitize(t(current_user.role_name, :scope => '.role_name').truncate(21)) %>
+                            </span>
+                            
+                        </span>
+                    </a>
+                    
+                </div>
+                <div class="logo-element">
+                    FNF
+                </div>
+            </li>
+            
+            <%= 
+                case current_user.role_name 
+                when "admin"
+                    render "layouts/sidebar_links/administration"
+                when "operator"
+                    render "layouts/sidebar_links/administration"
+                when "moderator"
+                    render "layouts/sidebar_links/administration"
+                when "distributor"
+                    render "layouts/sidebar_links/distributor"
+                when "manufacturer"
+                    render "layouts/sidebar_links/manufacturer"
+                when "simple_customer"
+                    render "layouts/sidebar_links/simple_customer"
+                else
+                    "нет меню"
+                end
+            %>
+        </ul>
+    </div>
+</nav>

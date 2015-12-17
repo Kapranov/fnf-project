@@ -1,0 +1,30 @@
+<div class="passwordBox animated fadeInDown">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox-content">
+                    <h2 class="font-bold">Востановление пароля</h2>
+                    <p>Введите свой адрес электронной почты и пароль будет сброшен и отправлен на электронную почте.</p>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { role: 'form', method: :post}) do |f| %>
+                            <%= f.error_notification %>
+                                <div class="form-group">
+                                    <%= f.email_field :email, required: true, autofocus: true, class: 'form-control', placeholder: "Адрес электронной почты" %>
+                                </div>
+                                <%= f.submit "Отправить новый пароль", class: 'btn btn-primary block full-width m-b right' %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                FNF Company
+            </div>
+            <div class="col-md-6 text-right">
+               <small>© <%= Time.now.year %></small>
+            </div>
+        </div>
+    </div>
